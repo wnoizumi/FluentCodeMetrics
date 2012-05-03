@@ -17,21 +17,34 @@ Funcionalidade: Calcular Acoplamento Eferente (Ce)
 		Dado que tenho um <tipo>
 		Quando inspeciono seu acoplamento eferente
 		Então obtenho <ce>
+
+		#
 		# todos os tipos tem object, boolean, string, int32, type no mínimo
+		#
+		# além disso todos os tipos tem os seguintes atributos:
+		#	
+		#	System.Runtime.TargetedPatchingOptOutAttribute,
+        #	System.Security.SecuritySafeCriticalAttribute,
+        #	System.Runtime.ConstrainedExecution.ReliabilityContractAttribute,
+		#
+		# propriedades automáticas geram "atributos de classe" marcados com:
+		#
+		#	System.Runtime.CompilerServices.CompilerGeneratedAttribute
+		#
 
 		Exemplos: 
 			| tipo                              | ce |
-			| Samples.EmptyClass                | 5  |
-			| Samples.SingleArgCtor             | 6  |
-			| Samples.SingleArgVoidMethod       | 6  |
-			| Samples.FeeMethod                 | 6  |
-			| Samples.DateTimeArgDateTimeMethod | 6  |
-			| Samples.SingleProperty            | 6  |
-			| Samples.SingleField               | 6  |
-			| Samples.ExceptionRaiser           | 6  |
-			| Samples.SingleNonAutoProperty     | 6  |
-			| Samples.SingleEvent               | 6  |
-			| Samples.Attributes                | 8  |
+			| Samples.EmptyClass                | 8  |
+			| Samples.SingleArgCtor             | 9  |
+			| Samples.SingleArgVoidMethod       | 9  |
+			| Samples.FeeMethod                 | 9  |
+			| Samples.DateTimeArgDateTimeMethod | 9  |
+			| Samples.SingleProperty            | 10 |
+			| Samples.SingleField               | 9  |
+			| Samples.ExceptionRaiser           | 9  |
+			| Samples.SingleNonAutoProperty     | 9  |
+			| Samples.SingleEvent               | 9  |
+			| Samples.Attributes                | 12 |
 
 
 

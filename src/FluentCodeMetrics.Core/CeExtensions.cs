@@ -22,6 +22,26 @@ public static IEnumerable<Type>
                 BindingFlags.Public
         ;
 
+    var typeMetaAttributeTypes =
+        from attribute in that.GetCustomAttributes(true)
+        select attribute.GetType();
+
+    var fieldMetaAttributeTypes =
+        from field in that.GetFields(flags)
+        from attribute in field.GetCustomAttributes(true)
+        select attribute.GetType();
+
+    var methodMetaAttributeTypes =
+        from method in that.GetMethods(flags)
+        from attribute in method.GetCustomAttributes(true)
+        select attribute.GetType();
+
+    var methodParameterMetaAttributeTypes =
+        from method in that.GetMethods(flags)
+        from parameter in method.GetParameters()
+        from attribute in parameter.GetCustomAttributes(true)
+        select attribute.GetType();
+        
     var fieldTypes =
         from field in that.GetFields(flags)
         select field.FieldType;
@@ -46,6 +66,10 @@ public static IEnumerable<Type>
         select parameter.ParameterType;
     
     return new[] { that.BaseType }
+        .Union(typeMetaAttributeTypes)
+        .Union(fieldMetaAttributeTypes)
+        .Union(methodMetaAttributeTypes)
+        .Union(methodParameterMetaAttributeTypes)
         .Union(ctorParameterTypes)
         .Union(methodParameterTypes)
         .Union(fieldTypes)

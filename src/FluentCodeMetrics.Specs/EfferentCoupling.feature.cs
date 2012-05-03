@@ -76,17 +76,17 @@ considero também as referências ""herdadas"".", ProgrammingLanguage.CSharp, ((
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Calcular Acoplamento Eferente para um tipo")]
-        [NUnit.Framework.TestCaseAttribute("Samples.EmptyClass", "5", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("Samples.SingleArgCtor", "6", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("Samples.SingleArgVoidMethod", "6", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("Samples.FeeMethod", "6", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("Samples.DateTimeArgDateTimeMethod", "6", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("Samples.SingleProperty", "6", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("Samples.SingleField", "6", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("Samples.ExceptionRaiser", "6", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("Samples.SingleNonAutoProperty", "6", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("Samples.SingleEvent", "6", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("Samples.Attributes", "8", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.EmptyClass", "8", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.SingleArgCtor", "9", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.SingleArgVoidMethod", "9", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.FeeMethod", "9", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.DateTimeArgDateTimeMethod", "9", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.SingleProperty", "10", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.SingleField", "9", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.ExceptionRaiser", "9", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.SingleNonAutoProperty", "9", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.SingleEvent", "9", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.Attributes", "12", new string[0])]
         public virtual void CalcularAcoplamentoEferenteParaUmTipo(string tipo, string ce, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calcular Acoplamento Eferente para um tipo", exampleTags);
