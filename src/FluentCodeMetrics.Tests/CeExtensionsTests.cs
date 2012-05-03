@@ -1,8 +1,11 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+
+using NUnit.Framework;
 using SharpTestsEx;
 using FluentCodeMetrics.Core;
 using Samples;
-using System;
 
 namespace FluentCodeMetrics.Tests
 {
@@ -10,19 +13,24 @@ namespace FluentCodeMetrics.Tests
     // ReSharper disable InconsistentNaming
     public class CeExtensionsTests
     {
+        private readonly List<Type> common = new List<Type>()
+        {
+            typeof (System.Runtime.TargetedPatchingOptOutAttribute),
+            typeof (System.Security.SecuritySafeCriticalAttribute),
+            typeof (System.Runtime.ConstrainedExecution.ReliabilityContractAttribute),
+            typeof (object),
+            typeof (string),
+            typeof (bool),
+            typeof (int),
+            typeof (Type)
+        };
+
         [Test]
         public void GetReferencedTypes_EmptyClass()
         {
             typeof(EmptyClass).GetReferencedTypes()
-                .Should().Have.SameSequenceAs(
-                    typeof(object),    
-                    typeof(System.Runtime.TargetedPatchingOptOutAttribute),
-                    typeof(System.Security.SecuritySafeCriticalAttribute),
-                    typeof(System.Runtime.ConstrainedExecution.ReliabilityContractAttribute),
-                    typeof(string),
-                    typeof(bool),
-                    typeof(int),
-                    typeof(Type)
+                .Should().Have.SameValuesAs(
+                    common
                 );
         }
 
@@ -30,138 +38,100 @@ namespace FluentCodeMetrics.Tests
         public void GetReferencedTypes_SingleField()
         {
             typeof(SingleField).GetReferencedTypes()
-                .Should().Have.SameSequenceAs(
-                    typeof(object),
-                    typeof(System.Runtime.TargetedPatchingOptOutAttribute),
-                    typeof(System.Security.SecuritySafeCriticalAttribute),
-                    typeof(System.Runtime.ConstrainedExecution.ReliabilityContractAttribute),
-                    typeof(DateTime), // field type
-                    typeof(string),
-                    typeof(bool),
-                    typeof(int),
-                    typeof(Type)
-                );
+                .Should().Have.SameValuesAs(
+                    common.Union(new[]
+                    {
+                    typeof(DateTime) 
+                    })
+                 );
         }
 
         [Test]
         public void GetReferencedTypes_SingleProperty()
         {
             typeof(SingleProperty).GetReferencedTypes()
-                .Should().Have.SameSequenceAs(
-                    typeof(object),
-                    typeof(System.Runtime.CompilerServices.CompilerGeneratedAttribute),
-                    typeof(System.Runtime.TargetedPatchingOptOutAttribute),
-                    typeof(System.Security.SecuritySafeCriticalAttribute),
-                    typeof(System.Runtime.ConstrainedExecution.ReliabilityContractAttribute),
-                    typeof(DateTime), // field type
-                    typeof(string),
-                    typeof(bool),
-                    typeof(int),
-                    typeof(Type)
-                );
+                .Should().Have.SameValuesAs(
+                    common.Union(new[]
+                    {
+                    typeof(DateTime),
+                    typeof(System.Runtime.CompilerServices.CompilerGeneratedAttribute)
+                    })
+                 );
         }
 
         [Test]
         public void GetReferencedTypes_SingleNonAutoProperty()
         {
             typeof(SingleNonAutoProperty).GetReferencedTypes()
-                .Should().Have.SameSequenceAs(
-                    typeof(object),
-                    typeof(System.Runtime.TargetedPatchingOptOutAttribute),
-                    typeof(System.Security.SecuritySafeCriticalAttribute),
-                    typeof(System.Runtime.ConstrainedExecution.ReliabilityContractAttribute),
-                    typeof(DateTime), // property type
-                    typeof(string),
-                    typeof(bool),
-                    typeof(int),
-                    typeof(Type)
-                );
+                .Should().Have.SameValuesAs(
+                    common.Union(new[]
+                    {
+                    typeof(DateTime) 
+                    })
+                 );
         }
 
         [Test]
         public void GetReferencedTypes_FeeMethod()
         {
             typeof(FeeMethod).GetReferencedTypes()
-                .Should().Have.SameSequenceAs(
-                    typeof(object),
-                    typeof(System.Runtime.TargetedPatchingOptOutAttribute),
-                    typeof(System.Security.SecuritySafeCriticalAttribute),
-                    typeof(System.Runtime.ConstrainedExecution.ReliabilityContractAttribute),
-                    typeof(Fee), // returning type
-                    typeof(string),
-                    typeof(bool),
-                    typeof(int),
-                    typeof(Type)
-                );
+                .Should().Have.SameValuesAs(
+                    common.Union(new[]
+                    {
+                    typeof(Fee) 
+                    })
+                 );
         }
 
         [Test]
         public void GetReferencedTypes_SingleArgVoidMethod()
         {
             typeof(SingleArgVoidMethod).GetReferencedTypes()
-                .Should().Have.SameSequenceAs(
-                    typeof(object),
-                    typeof(System.Runtime.TargetedPatchingOptOutAttribute),
-                    typeof(System.Security.SecuritySafeCriticalAttribute),
-                    typeof(System.Runtime.ConstrainedExecution.ReliabilityContractAttribute),
-                    typeof(Fee), // argument type
-                    typeof(string),
-                    typeof(bool),
-                    typeof(int),
-                    typeof(Type)
-                );
+                .Should().Have.SameValuesAs(
+                    common.Union(new[]
+                    {
+                    typeof(Fee) 
+                    })
+                 );
         }
 
         [Test]
         public void GetReferencedTypes_SingleArgCtor()
         {
             typeof(SingleArgCtor).GetReferencedTypes()
-                .Should().Have.SameSequenceAs(
-                    typeof(object),
-                    typeof(System.Runtime.TargetedPatchingOptOutAttribute),
-                    typeof(System.Security.SecuritySafeCriticalAttribute),
-                    typeof(System.Runtime.ConstrainedExecution.ReliabilityContractAttribute),
-                    typeof(Fee), // argument type
-                    typeof(string),
-                    typeof(bool),
-                    typeof(int),
-                    typeof(Type)
-                );
+                .Should().Have.SameValuesAs(
+                    common.Union(new[]
+                    {
+                    typeof(Fee) 
+                    })
+                 );
         }
 
         [Test]
         public void GetReferencedTypes_ExceptionRaiser()
         {
             typeof(ExceptionRaiser).GetReferencedTypes()
-                .Should().Have.SameSequenceAs(
-                    typeof(object),
-                    typeof(ExceptionRaiser),  // Class Attribute
-                    typeof(string),
-                    typeof(bool),
-                    typeof(int),
-                    typeof(Type)
-                );
+                .Should().Have.SameValuesAs(
+                    common.Union(new[]
+                    {
+                    typeof(Exception) 
+                    })
+                 );
         }
 
         [Test]
         public void GetReferencedTypes_Attributes()
         {
             typeof(Attributes).GetReferencedTypes()
-                .Should().Have.SameSequenceAs(
-                    typeof(object),
+                .Should().Have.SameValuesAs(
+                    common.Union(new []
+                    {
                     typeof(SerializableAttribute),  // Class Attribute
                     typeof(NonSerializedAttribute), // Field Attribute
                     typeof(FooAttribute),           // MethodAttribute
-                    typeof(System.Runtime.TargetedPatchingOptOutAttribute),
-                    typeof(System.Security.SecuritySafeCriticalAttribute),
-                    typeof(System.Runtime.ConstrainedExecution.ReliabilityContractAttribute),
-                    typeof(FooAttribute2),          // Parameter Attribute
-                    typeof(int),
-                    typeof(string),
-                    typeof(bool),
-                    typeof(Type)
-                );
-
+                    typeof(FooAttribute2)           // Parameter Attribute
+                    })
+                 );
         }
     }
     // ReSharper restore InconsistentNaming
