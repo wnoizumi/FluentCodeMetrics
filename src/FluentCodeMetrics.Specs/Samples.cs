@@ -56,6 +56,7 @@ namespace Samples
         }
     }
 
+   
     public class SingleField
     {
 // ReSharper disable InconsistentNaming
@@ -65,11 +66,34 @@ namespace Samples
 // ReSharper restore InconsistentNaming
     }
 
-    class OneException
+    public class ExceptionRaiser
     {
          public void Foo()
          {
              throw new Exception();
          }
     }
+
+    public class SingleEvent
+    {
+        public EventHandler Event;
+    }
+
+
+    [Serializable]
+    public class Attributes
+    {
+        [NonSerialized] public int FooField;
+
+        [FooAttribute]
+        public void FooMethod([FooAttribute2] int foo) {}
+    }
+
+    public class FooAttribute : Attribute
+    {
+    }
+
+    public class FooAttribute2 : Attribute
+    {}
+
 }

@@ -7,7 +7,8 @@ Funcionalidade: Calcular Acoplamento Eferente (Ce)
 	
 	Entram na contagem: classe base, interfaces implementadas, 
 	tipos dos variáveis locais, atributos e das propriedades, 
-	tipos dos parâmetros em métodos e construtores, exceptions.
+	tipos dos parâmetros em métodos e construtores, exceptions,
+	eventos e atributos (obrigado @IsraelAece).
 
 	Como o objetivo é identificar a "complexidade" de um tipo,
 	considero também as referências "herdadas".
@@ -27,8 +28,11 @@ Funcionalidade: Calcular Acoplamento Eferente (Ce)
 			| Samples.DateTimeArgDateTimeMethod | 6  |
 			| Samples.SingleProperty            | 6  |
 			| Samples.SingleField               | 6  |
-			| Samples.OneException              | 6  |
+			| Samples.ExceptionRaiser           | 6  |
 			| Samples.SingleNonAutoProperty     | 6  |
+			| Samples.SingleEvent               | 6  |
+			| Samples.Attributes                | 8  |
+
 
 
 

@@ -92,6 +92,37 @@ namespace FluentCodeMetrics.Tests
                     typeof(Type)
                 );
         }
+
+        [Test]
+        public void GetReferencedTypes_ExceptionRaiser()
+        {
+            typeof(SingleArgCtor).GetReferencedTypes()
+                .Should().Have.SameSequenceAs(
+                    typeof(object),
+                    typeof(ExceptionRaiser),  // Class Attribute
+                    typeof(string),
+                    typeof(bool),
+                    typeof(int),
+                    typeof(Type)
+                );
+        }
+
+        [Test]
+        public void GetReferencedTypes_Attributes()
+        {
+            typeof(SingleArgCtor).GetReferencedTypes()
+                .Should().Have.SameSequenceAs(
+                    typeof(object),
+                    typeof(SerializableAttribute),  // Class Attribute
+                    typeof(NonSerializedAttribute), // Field Attribute
+                    typeof(FooAttribute),           // MethodAttribute
+                    typeof(FooAttribute2),          // Parameter Attribute
+                    typeof(string),
+                    typeof(bool),
+                    typeof(int),
+                    typeof(Type)
+                );
+        }
     }
     // ReSharper restore InconsistentNaming
 }
