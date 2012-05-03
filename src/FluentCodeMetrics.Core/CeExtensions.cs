@@ -18,14 +18,13 @@ namespace FluentCodeMetrics.Core
         }
 
         public static IEnumerable<Type>
-            GetReferencedTypes(this Type that)
+            GetReferencedTypesByNewobjInstruction(this Type that)
         {
-
             var assembly = AssemblyCache.Load(that.Assembly.GetName().Name);
             var typeDef = assembly.MainModule.Types
                 .First(type => type.FullName == that.FullName);
 
-            var newObjTypes =
+            return
                 from method in typeDef.Methods
                 from instruction in method.Body.Instructions
                 where instruction.OpCode == OpCodes.Newobj
@@ -34,6 +33,13 @@ namespace FluentCodeMetrics.Core
                 let type = Type.GetType(typeFullName)
                 where type != null
                 select type;
+        }
+
+        public static IEnumerable<Type>
+            GetReferencedTypes(this Type that)
+        {
+
+            
             
             const BindingFlags flags = BindingFlags.Instance |
                                        BindingFlags.NonPublic |
@@ -83,7 +89,7 @@ namespace FluentCodeMetrics.Core
                 select parameter.ParameterType;
 
             return new[] { that.BaseType }
-                .Union(newObjTypes)
+                .Union(that.GetReferencedTypesByNewobjInstruction())
                 .Union(typeMetaAttributeTypes)
                 .Union(fieldMetaAttributeTypes)
                 .Union(methodMetaAttributeTypes)

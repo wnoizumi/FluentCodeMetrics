@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Mono.Cecil;
+﻿using System.Collections.Generic;
 using System.IO;
+using Mono.Cecil;
 
 namespace FluentCodeMetrics.Core.Cecil
 {
     public static class AssemblyCache
     {
-        private readonly static Dictionary<string, AssemblyDefinition>
+        private static readonly Dictionary<string, AssemblyDefinition>
             Dictionary = new Dictionary<string, AssemblyDefinition>();
 
         public static AssemblyDefinition Load(string assemblyName)
