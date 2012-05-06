@@ -2,6 +2,7 @@
 using FluentCodeMetrics.Core;
 using SharpTestsEx;
 using TechTalk.SpecFlow;
+using FluentCodeMetrics.Core.TypeFilters;
 
 namespace FluentCodeMetrics.Specs
 {
@@ -11,6 +12,7 @@ namespace FluentCodeMetrics.Specs
         // ReSharper disable InconsistentNaming
         private int resultingCe;
         private Type workingType;
+        private TypeFilter filter;
         // ReSharper restore InconsistentNaming
 
         [Given(@"que tenho um (.*)")]
@@ -18,6 +20,29 @@ namespace FluentCodeMetrics.Specs
         {
             workingType = Type.GetType(tipo);
             workingType.Should().Not.Be.Null();
+        }
+
+        
+        [Given(@"tenho um fitro de referências que desejo ignorar")]
+        public void DadoTenhoUmFitroDeReferenciasQueDesejoIgnorar()
+        {
+        }
+
+        [Given(@"esse filtro relaciona (.*)")]
+        public void DadoEsseFiltroRelaciona(string tipo)
+        {
+            var type = Type.GetType(tipo);
+            type.Should().Not.Be.Null();
+
+            filter = filter == null
+                         ? TypeFilter.EqualsTo(type)
+                         : filter.Or(type);
+        }
+
+        [When(@"inspeciono seu acoplamento eferente considerando esse filtro")]
+        public void QuandoInspecionoSeuAcoplamentoEferenteConsiderandoEsseFiltro()
+        {
+            resultingCe = workingType.ComputeCe(filter.Not());
         }
 
         [When(@"inspeciono seu acoplamento eferente")]

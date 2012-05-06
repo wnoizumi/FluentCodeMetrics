@@ -52,6 +52,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EfferentCouplingWithFilter.feature.cs">
+      <DependentUpon>EfferentCouplingWithFilter.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="EfferentCoupling.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -63,6 +68,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="EfferentCouplingWithFilter.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>EfferentCouplingWithFilter.feature.cs</LastGenOutput>
+    </None>
     <None Include="EfferentCoupling.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>EfferentCoupling.feature.cs</LastGenOutput>

@@ -5,6 +5,7 @@ using System.Reflection;
 using Mono.Cecil;
 using FluentCodeMetrics.Core.Cecil;
 using Mono.Cecil.Cil;
+using TypeFilter = FluentCodeMetrics.Core.TypeFilters.TypeFilter;
 
 namespace FluentCodeMetrics.Core
 {
@@ -100,6 +101,13 @@ namespace FluentCodeMetrics.Core
                 .Union(propertyTypes)
                 .Union(methodReturnTypes)
                 .Distinct();
+        }
+
+        public static int ComputeCe(this Type that, TypeFilter filter)
+        {
+            return that
+                .GetReferencedTypes()
+                .Count(filter.Check);
         }
     }
 }
