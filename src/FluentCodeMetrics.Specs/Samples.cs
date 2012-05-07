@@ -96,4 +96,9 @@ namespace Samples
     public class FooAttribute2 : Attribute
     {}
 
+
+    public static class StaticMember
+    {
+        public static DateTime Foo { get; set; }
+    }
 }

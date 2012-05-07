@@ -133,6 +133,19 @@ namespace FluentCodeMetrics.Tests
                     })
                  );
         }
+
+        [Test]
+        public void GetReferencedTypes_StaticProperty()
+        {
+            typeof(StaticMember).GetReferencedTypes()
+                .Should().Have.SameValuesAs(
+                    common.Union(new[]
+                    {
+                    typeof(DateTime),
+                    typeof(System.Runtime.CompilerServices.CompilerGeneratedAttribute)
+                    })
+                 );
+        }
     }
     // ReSharper restore InconsistentNaming
 }

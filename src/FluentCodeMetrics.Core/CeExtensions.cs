@@ -42,7 +42,8 @@ namespace FluentCodeMetrics.Core
 
             
             
-            const BindingFlags flags = BindingFlags.Instance |
+            const BindingFlags flags = BindingFlags.Static |
+                                       BindingFlags.Instance |
                                        BindingFlags.NonPublic |
                                        BindingFlags.Public;
 
