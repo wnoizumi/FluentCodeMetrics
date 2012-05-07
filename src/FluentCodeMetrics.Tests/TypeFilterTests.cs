@@ -47,5 +47,18 @@ namespace FluentCodeMetrics.Tests
                 .Should().Be(expected);
                
         }
+
+        [Test]
+        [TestCase(typeof(int), false)]
+        [TestCase(typeof(string), false)]
+        [TestCase(typeof(DateTime), true)]
+        public void NotEqualsToInt32AndNotEqualsToString(Type type, bool expected)
+        {
+            typeof(int).Not()
+                .And(typeof(string).Not())
+                .Check(type)
+                .Should().Be(expected);
+
+        }
     }
 }

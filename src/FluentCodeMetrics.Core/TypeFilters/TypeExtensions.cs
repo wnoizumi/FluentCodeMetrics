@@ -10,6 +10,12 @@ namespace FluentCodeMetrics.Core.TypeFilters
                 .Or(right);
         }
 
+        public static TypeFilter And(this Type left, TypeFilter right)
+        {
+            return TypeFilter.EqualsTo(left)
+                .And(right);
+        }
+
         public static TypeFilter Not(this Type that)
         {
             return TypeFilter.Not(that);

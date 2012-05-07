@@ -11,6 +11,11 @@ namespace FluentCodeMetrics.Core.TypeFilters
             return new OrTypeFilter(this, filter);
         }
 
+        public TypeFilter And(TypeFilter filter)
+        {
+            return new AndTypeFilter(this, filter);
+        }
+
         public TypeFilter Not()
         {
             return TypeFilter.Not(this);
@@ -24,6 +29,16 @@ namespace FluentCodeMetrics.Core.TypeFilters
         public static TypeFilter Not(TypeFilter filter)
         {
             return new NotTypeFilter(filter);
+        }
+
+        public static TypeFilter And(TypeFilter left, TypeFilter right)
+        {
+            return new AndTypeFilter(left, right);
+        }
+
+        public static TypeFilter Or(TypeFilter left, TypeFilter right)
+        {
+            return new OrTypeFilter(left, right);
         }
 
         public static TypeFilter EqualsTo(Type type)
