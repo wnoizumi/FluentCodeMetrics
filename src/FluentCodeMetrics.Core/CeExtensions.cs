@@ -18,6 +18,38 @@ namespace FluentCodeMetrics.Core
                 .Count();
         }
 
+        const BindingFlags Flags = BindingFlags.Static |
+                                       BindingFlags.Instance |
+                                       BindingFlags.NonPublic |
+                                       BindingFlags.Public;
+
+        public static IEnumerable<Type>
+            GetReferencedTypes(this Type that)
+        {
+            var typeMetaAttributeTypes = GetTypeMetaAttributeTypes(that);
+            var fieldMetaAttributeTypes = GetFieldMetaAttributeTypes(that);
+            var methodMetaAttributeTypes = GetMethodMetaAttributeTypes(that);
+            var methodParameterMetaAttributeTypes = GetMethodParameterMetaAttributeTypes(that);
+            var fieldTypes = GetFieldTypes(that);
+            var propertyTypes = GetPropertyTypes(that);
+            var methodReturnTypes = GetMethodReturnTypes(that);
+            var methodParameterTypes = GetMethodParameterTypes(that);
+            var ctorParameterTypes = GetCtorParameterTypes(that);
+
+            return new[] { that.BaseType }
+                .Union(that.GetReferencedTypesByNewobjInstruction())
+                .Union(typeMetaAttributeTypes)
+                .Union(fieldMetaAttributeTypes)
+                .Union(methodMetaAttributeTypes)
+                .Union(methodParameterMetaAttributeTypes)
+                .Union(ctorParameterTypes)
+                .Union(methodParameterTypes)
+                .Union(fieldTypes)
+                .Union(propertyTypes)
+                .Union(methodReturnTypes)
+                .Distinct();
+        }
+
         public static IEnumerable<Type>
             GetReferencedTypesByNewobjInstruction(this Type that)
         {
@@ -36,72 +68,82 @@ namespace FluentCodeMetrics.Core
                 select type;
         }
 
-        public static IEnumerable<Type>
-            GetReferencedTypes(this Type that)
+        private static IEnumerable<Type> GetCtorParameterTypes(Type that)
         {
+            var ctorParameterTypes =
+                from ctor in that.GetConstructors(Flags)
+                from parameter in ctor.GetParameters()
+                select parameter.ParameterType;
+            return ctorParameterTypes;
+        }
 
-            
-            
-            const BindingFlags flags = BindingFlags.Static |
-                                       BindingFlags.Instance |
-                                       BindingFlags.NonPublic |
-                                       BindingFlags.Public;
+        private static IEnumerable<Type> GetMethodParameterTypes(Type that)
+        {
+            var methodParameterTypes =
+                from method in that.GetMethods(Flags)
+                from parameter in method.GetParameters()
+                select parameter.ParameterType;
+            return methodParameterTypes;
+        }
 
-            var typeMetaAttributeTypes =
-                from attribute in that.GetCustomAttributes(true)
-                select attribute.GetType();
+        private static IEnumerable<Type> GetMethodReturnTypes(Type that)
+        {
+            var methodReturnTypes =
+                from method in that.GetMethods(Flags)
+                where method.ReturnType != typeof (void)
+                select method.ReturnType;
+            return methodReturnTypes;
+        }
 
-            var fieldMetaAttributeTypes =
-                from field in that.GetFields(flags)
-                from attribute in field.GetCustomAttributes(true)
-                select attribute.GetType();
+        private static IEnumerable<Type> GetPropertyTypes(Type that)
+        {
+            var propertyTypes =
+                from property in that.GetProperties(Flags)
+                select property.PropertyType;
+            return propertyTypes;
+        }
 
-            var methodMetaAttributeTypes =
-                from method in that.GetMethods(flags)
-                from attribute in method.GetCustomAttributes(true)
-                select attribute.GetType();
+        private static IEnumerable<Type> GetFieldTypes(Type that)
+        {
+            var fieldTypes =
+                from field in that.GetFields(Flags)
+                select field.FieldType;
+            return fieldTypes;
+        }
 
+        private static IEnumerable<Type> GetMethodParameterMetaAttributeTypes(Type that)
+        {
             var methodParameterMetaAttributeTypes =
-                from method in that.GetMethods(flags)
+                from method in that.GetMethods(Flags)
                 from parameter in method.GetParameters()
                 from attribute in parameter.GetCustomAttributes(true)
                 select attribute.GetType();
+            return methodParameterMetaAttributeTypes;
+        }
 
-            var fieldTypes =
-                from field in that.GetFields(flags)
-                select field.FieldType;
+        private static IEnumerable<Type> GetMethodMetaAttributeTypes(Type that)
+        {
+            var methodMetaAttributeTypes =
+                from method in that.GetMethods(Flags)
+                from attribute in method.GetCustomAttributes(true)
+                select attribute.GetType();
+            return methodMetaAttributeTypes;
+        }
 
-            var propertyTypes =
-                from property in that.GetProperties(flags)
-                select property.PropertyType;
+        private static IEnumerable<Type> GetFieldMetaAttributeTypes(Type that)
+        {
+            var fieldMetaAttributeTypes =
+                from field in that.GetFields(Flags)
+                from attribute in field.GetCustomAttributes(true)
+                select attribute.GetType();
+            return fieldMetaAttributeTypes;
+        }
 
-            var methodReturnTypes =
-                from method in that.GetMethods(flags)
-                where method.ReturnType != typeof(void)
-                select method.ReturnType;
-
-            var methodParameterTypes =
-                from method in that.GetMethods(flags)
-                from parameter in method.GetParameters()
-                select parameter.ParameterType;
-
-            var ctorParameterTypes =
-                from ctor in that.GetConstructors(flags)
-                from parameter in ctor.GetParameters()
-                select parameter.ParameterType;
-
-            return new[] { that.BaseType }
-                .Union(that.GetReferencedTypesByNewobjInstruction())
-                .Union(typeMetaAttributeTypes)
-                .Union(fieldMetaAttributeTypes)
-                .Union(methodMetaAttributeTypes)
-                .Union(methodParameterMetaAttributeTypes)
-                .Union(ctorParameterTypes)
-                .Union(methodParameterTypes)
-                .Union(fieldTypes)
-                .Union(propertyTypes)
-                .Union(methodReturnTypes)
-                .Distinct();
+        private static IEnumerable<Type> GetTypeMetaAttributeTypes(Type that)
+        {
+            return
+                from attribute in that.GetCustomAttributes(true)
+                select attribute.GetType();
         }
 
         public static int ComputeCe(this Type that, TypeFilter filter)
