@@ -13,11 +13,20 @@ namespace FluentCodeMetrics.Core
     {
         // ReSharper disable InconsistentNaming
         private readonly Type workingType;
+        private readonly IEnumerable<Type> other;
         // ReSharper restore InconsistentNaming
-        
-        public ReferencesInspector(Type type)
+
+        internal ReferencesInspector(Type type, IEnumerable<Type> other) 
         {
             workingType = type;
+            this.other = other;
+        }
+        
+        private ReferencesInspector(Type type) 
+           
+        {
+            workingType = type;
+            other = new Type[] {};
         }
 
         public static ReferencesInspector For<T>()
@@ -36,7 +45,16 @@ namespace FluentCodeMetrics.Core
                                            BindingFlags.Public;
 
         public ReferencedTypes
-            OfNewobjInstruction()
+            FromBaseType()
+        {
+            return new ReferencedTypes(
+                new[] { workingType.BaseType },
+                workingType
+                );
+        }
+
+        public ReferencedTypes
+            FromNewobjInstructions()
         {
             var assembly = AssemblyCache.Load(workingType.Assembly.GetName().Name);
             var typeDef = assembly.MainModule.Types
@@ -52,97 +70,97 @@ namespace FluentCodeMetrics.Core
                 where type != null
                 select type;
 
-            return new ReferencedTypes(source);
+            return new ReferencedTypes(other.Union(source), workingType);
         }
 
         public ReferencedTypes 
-            OfCtorParametersTypes()
+            FromCtorParameters()
         {
             var source =    
                 from ctor in workingType.GetConstructors(Flags)
                 from parameter in ctor.GetParameters()
                 select parameter.ParameterType;
-            return new ReferencedTypes(source);
+            return new ReferencedTypes(other.Union(source), workingType);
         }
 
         public ReferencedTypes 
-            OfMethodsParametersTypes()
+            FromMethodsParameters()
         {
             var source =    
                 from method in workingType.GetMethods(Flags)
                 from parameter in method.GetParameters()
                 select parameter.ParameterType;
 
-            return new ReferencedTypes(source);
+            return new ReferencedTypes(other.Union(source), workingType);
         }
 
         public ReferencedTypes 
-            OfMethodsReturnTypes()
+            FromMethodsReturnTypes()
         {
             var source =     
                 from method in workingType.GetMethods(Flags)
                 where method.ReturnType != typeof(void)
                 select method.ReturnType;
 
-            return new ReferencedTypes(source);
+            return new ReferencedTypes(other.Union(source), workingType);
         }
 
         public ReferencedTypes 
-            OfPropertiesTypes()
+            FromProperties()
         {
             var source =     
                 from property in workingType.GetProperties(Flags)
                 select property.PropertyType;
-            return new ReferencedTypes(source);
+            return new ReferencedTypes(other.Union(source), workingType);
         }
 
         public ReferencedTypes 
-            OfFieldsTypes()
+            FromFields()
         {
             var source =    
                 from field in workingType.GetFields(Flags)
                 select field.FieldType;
-            return new ReferencedTypes(source);
+            return new ReferencedTypes(other.Union(source), workingType);
         }
 
         public ReferencedTypes 
-            OfParametersMetaAttributesTypes()
+            FromParametersMetaAttributes()
         {
             var source =   
                 from method in workingType.GetMethods(Flags)
                 from parameter in method.GetParameters()
                 from attribute in parameter.GetCustomAttributes(true)
                 select attribute.GetType();
-            return new ReferencedTypes(source);
+            return new ReferencedTypes(other.Union(source), workingType);
         }
 
         public ReferencedTypes 
-            OfMethodsMetaAttributesTypes()
+            FromMethodsMetaAttributes()
         {
             var source =   
                 from method in workingType.GetMethods(Flags)
                 from attribute in method.GetCustomAttributes(true)
                 select attribute.GetType();
-            return new ReferencedTypes(source);
+            return new ReferencedTypes(other.Union(source), workingType);
         }
 
         public ReferencedTypes 
-            OfFieldsMetaAttributesTypes()
+            FromFieldsMetaAttributes()
         {
             var source = 
                 from field in workingType.GetFields(Flags)
                 from attribute in field.GetCustomAttributes(true)
                 select attribute.GetType();
-            return new ReferencedTypes(source);
+            return new ReferencedTypes(other.Union(source), workingType);
         }
 
         public ReferencedTypes 
-            OfMetaAttributesTypes()
+            FromMetaAttributes()
         {
             var source = 
                 from attribute in workingType.GetCustomAttributes(true)
                 select attribute.GetType();
-            return new ReferencedTypes(source);
+            return new ReferencedTypes(other.Union(source), workingType);
         }
     }
 }

@@ -8,10 +8,13 @@ namespace FluentCodeMetrics.Core
     public class ReferencedTypes : 
         IEnumerable<Type>
     {
-        private readonly IEnumerable<Type> sourceField;  
-        internal ReferencedTypes(IEnumerable<Type> source)
+        private readonly IEnumerable<Type> sourceField;
+        private readonly Type originalField;
+
+        internal ReferencedTypes(IEnumerable<Type> source, Type original)
         {
             sourceField = source;
+            originalField = original;
         }
 
         public IEnumerator<Type> GetEnumerator()
@@ -23,5 +26,12 @@ namespace FluentCodeMetrics.Core
         {
             return sourceField.GetEnumerator();
         }
+
+        public ReferencesInspector And
+        {
+            get { return new ReferencesInspector(originalField, sourceField); }
+        }
+
+
     }
 }

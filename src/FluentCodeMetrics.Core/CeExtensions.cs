@@ -19,33 +19,21 @@ namespace FluentCodeMetrics.Core
         }
 
         
-        public static IEnumerable<Type>
+        public static ReferencedTypes
             GetReferencedTypes(this Type that)
         {
-            var inspector = ReferencesInspector.For(that);
-            var referencedTypesByNewobjInstruction = inspector.OfNewobjInstruction();
-            var typeMetaAttributeTypes = inspector.OfMetaAttributesTypes();
-            var fieldMetaAttributeTypes = inspector.OfFieldsMetaAttributesTypes();
-            var methodMetaAttributeTypes = inspector.OfMethodsMetaAttributesTypes();
-            var methodParameterMetaAttributeTypes = inspector.OfParametersMetaAttributesTypes();
-            var fieldTypes = inspector.OfFieldsTypes();
-            var propertyTypes = inspector.OfPropertiesTypes();
-            var methodReturnTypes = inspector.OfMethodsReturnTypes();
-            var methodParameterTypes = inspector.OfMethodsParametersTypes();
-            var ctorParameterTypes = inspector.OfCtorParametersTypes();
-
-            return new[] { that.BaseType }
-                .Union(referencedTypesByNewobjInstruction)
-                .Union(typeMetaAttributeTypes)
-                .Union(fieldMetaAttributeTypes)
-                .Union(methodMetaAttributeTypes)
-                .Union(methodParameterMetaAttributeTypes)
-                .Union(ctorParameterTypes)
-                .Union(methodParameterTypes)
-                .Union(fieldTypes)
-                .Union(propertyTypes)
-                .Union(methodReturnTypes)
-                .Distinct();
+            return ReferencesInspector.For(that)
+                .FromBaseType()
+                .And.FromNewobjInstructions()
+                .And.FromMetaAttributes()
+                .And.FromFieldsMetaAttributes()
+                .And.FromMethodsMetaAttributes()
+                .And.FromParametersMetaAttributes()
+                .And.FromFields()
+                .And.FromProperties()
+                .And.FromMethodsReturnTypes()
+                .And.FromMethodsParameters()
+                .And.FromCtorParameters();
         }
 
 
