@@ -22,17 +22,17 @@ namespace FluentCodeMetrics.Core
         public static IEnumerable<Type>
             GetReferencedTypes(this Type that)
         {
-            var inspector = new ReferencesInspector();
-            var referencedTypesByNewobjInstruction = inspector.GetReferencedTypesByNewobjInstruction(that);
-            var typeMetaAttributeTypes = inspector.GetTypeMetaAttributeTypes(that);
-            var fieldMetaAttributeTypes = inspector.GetFieldMetaAttributeTypes(that);
-            var methodMetaAttributeTypes = inspector.GetMethodMetaAttributeTypes(that);
-            var methodParameterMetaAttributeTypes = inspector.GetMethodParameterMetaAttributeTypes(that);
-            var fieldTypes = inspector.GetFieldTypes(that);
-            var propertyTypes = inspector.GetPropertyTypes(that);
-            var methodReturnTypes = inspector.GetMethodReturnTypes(that);
-            var methodParameterTypes = inspector.GetMethodParameterTypes(that);
-            var ctorParameterTypes = inspector.GetCtorParameterTypes(that);
+            var inspector = ReferencesInspector.For(that);
+            var referencedTypesByNewobjInstruction = inspector.OfNewobjInstruction();
+            var typeMetaAttributeTypes = inspector.OfMetaAttributesTypes();
+            var fieldMetaAttributeTypes = inspector.OfFieldsMetaAttributesTypes();
+            var methodMetaAttributeTypes = inspector.OfMethodsMetaAttributesTypes();
+            var methodParameterMetaAttributeTypes = inspector.OfParametersMetaAttributesTypes();
+            var fieldTypes = inspector.OfFieldsTypes();
+            var propertyTypes = inspector.OfPropertiesTypes();
+            var methodReturnTypes = inspector.OfMethodsReturnTypes();
+            var methodParameterTypes = inspector.OfMethodsParametersTypes();
+            var ctorParameterTypes = inspector.OfCtorParametersTypes();
 
             return new[] { that.BaseType }
                 .Union(referencedTypesByNewobjInstruction)
