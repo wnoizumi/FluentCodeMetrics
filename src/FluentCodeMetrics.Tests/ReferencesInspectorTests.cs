@@ -11,7 +11,7 @@ namespace FluentCodeMetrics.Tests
 {
     [TestFixture]
     // ReSharper disable InconsistentNaming
-    public class CeExtensionsTests
+    public class ReferencesInspectorTests
     {
         private readonly List<Type> common = new List<Type>()
         {
@@ -26,18 +26,18 @@ namespace FluentCodeMetrics.Tests
         };
 
         [Test]
-        public void GetReferencedTypes_EmptyClass()
+        public void All_EmptyClass()
         {
-            typeof(EmptyClass).GetReferencedTypes()
+            ReferencesInspector.For(typeof(EmptyClass)).All()
                 .Should().Have.SameValuesAs(
                     common
                 );
         }
 
         [Test]
-        public void GetReferencedTypes_SingleField()
+        public void All_SingleField()
         {
-            typeof(SingleField).GetReferencedTypes()
+            ReferencesInspector.For(typeof(SingleField)).All()
                 .Should().Have.SameValuesAs(
                     common.Union(new[]
                     {
@@ -47,9 +47,9 @@ namespace FluentCodeMetrics.Tests
         }
 
         [Test]
-        public void GetReferencedTypes_SingleProperty()
+        public void All_SingleProperty()
         {
-            typeof(SingleProperty).GetReferencedTypes()
+            ReferencesInspector.For(typeof(SingleProperty)).All()
                 .Should().Have.SameValuesAs(
                     common.Union(new[]
                     {
@@ -60,9 +60,9 @@ namespace FluentCodeMetrics.Tests
         }
 
         [Test]
-        public void GetReferencedTypes_SingleNonAutoProperty()
+        public void All_SingleNonAutoProperty()
         {
-            typeof(SingleNonAutoProperty).GetReferencedTypes()
+            ReferencesInspector.For(typeof(SingleNonAutoProperty)).All()
                 .Should().Have.SameValuesAs(
                     common.Union(new[]
                     {
@@ -72,9 +72,9 @@ namespace FluentCodeMetrics.Tests
         }
 
         [Test]
-        public void GetReferencedTypes_FeeMethod()
+        public void All_FeeMethod()
         {
-            typeof(FeeMethod).GetReferencedTypes()
+            ReferencesInspector.For(typeof(FeeMethod)).All()
                 .Should().Have.SameValuesAs(
                     common.Union(new[]
                     {
@@ -84,9 +84,9 @@ namespace FluentCodeMetrics.Tests
         }
 
         [Test]
-        public void GetReferencedTypes_SingleArgVoidMethod()
+        public void All_SingleArgVoidMethod()
         {
-            typeof(SingleArgVoidMethod).GetReferencedTypes()
+            ReferencesInspector.For(typeof(SingleArgVoidMethod)).All()
                 .Should().Have.SameValuesAs(
                     common.Union(new[]
                     {
@@ -96,9 +96,9 @@ namespace FluentCodeMetrics.Tests
         }
 
         [Test]
-        public void GetReferencedTypes_SingleArgCtor()
+        public void All_SingleArgCtor()
         {
-            typeof(SingleArgCtor).GetReferencedTypes()
+            ReferencesInspector.For(typeof(SingleArgCtor)).All()
                 .Should().Have.SameValuesAs(
                     common.Union(new[]
                     {
@@ -108,9 +108,9 @@ namespace FluentCodeMetrics.Tests
         }
 
         [Test]
-        public void GetReferencedTypes_ExceptionRaiser()
+        public void All_ExceptionRaiser()
         {
-            typeof(ExceptionRaiser).GetReferencedTypes()
+            ReferencesInspector.For(typeof(ExceptionRaiser)).All()
                 .Should().Have.SameValuesAs(
                     common.Union(new[]
                     {
@@ -120,9 +120,9 @@ namespace FluentCodeMetrics.Tests
         }
 
         [Test]
-        public void GetReferencedTypes_Attributes()
+        public void All_Attributes()
         {
-            typeof(Attributes).GetReferencedTypes()
+            ReferencesInspector.For(typeof(Attributes)).All()
                 .Should().Have.SameValuesAs(
                     common.Union(new []
                     {
@@ -135,9 +135,9 @@ namespace FluentCodeMetrics.Tests
         }
 
         [Test]
-        public void GetReferencedTypes_StaticProperty()
+        public void All_StaticProperty()
         {
-            typeof(StaticMember).GetReferencedTypes()
+            ReferencesInspector.For(typeof(StaticMember)).All()
                 .Should().Have.SameValuesAs(
                     common.Union(new[]
                     {

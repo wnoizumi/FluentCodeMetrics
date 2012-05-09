@@ -162,5 +162,22 @@ namespace FluentCodeMetrics.Core
                 select attribute.GetType();
             return new ReferencedTypes(other.Union(source), workingType);
         }
+
+        public ReferencedTypes
+            All()
+        {
+            return new ReferencedTypes(FromBaseType()
+                .And.FromNewobjInstructions()
+                .And.FromMetaAttributes()
+                .And.FromFieldsMetaAttributes()
+                .And.FromMethodsMetaAttributes()
+                .And.FromParametersMetaAttributes()
+                .And.FromFields()
+                .And.FromProperties()
+                .And.FromMethodsReturnTypes()
+                .And.FromMethodsParameters()
+                .And.FromCtorParameters()
+                .Distinct(), workingType);
+        }
     }
 }
