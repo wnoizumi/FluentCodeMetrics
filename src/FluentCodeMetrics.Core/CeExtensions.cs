@@ -22,18 +22,20 @@ namespace FluentCodeMetrics.Core
         public static IEnumerable<Type>
             GetReferencedTypes(this Type that)
         {
-            var typeMetaAttributeTypes = ReferencesInspector.GetTypeMetaAttributeTypes(that);
-            var fieldMetaAttributeTypes = ReferencesInspector.GetFieldMetaAttributeTypes(that);
-            var methodMetaAttributeTypes = ReferencesInspector.GetMethodMetaAttributeTypes(that);
-            var methodParameterMetaAttributeTypes = ReferencesInspector.GetMethodParameterMetaAttributeTypes(that);
-            var fieldTypes = ReferencesInspector.GetFieldTypes(that);
-            var propertyTypes = ReferencesInspector.GetPropertyTypes(that);
-            var methodReturnTypes = ReferencesInspector.GetMethodReturnTypes(that);
-            var methodParameterTypes = ReferencesInspector.GetMethodParameterTypes(that);
-            var ctorParameterTypes = ReferencesInspector.GetCtorParameterTypes(that);
+            var inspector = new ReferencesInspector();
+            var referencedTypesByNewobjInstruction = inspector.GetReferencedTypesByNewobjInstruction(that);
+            var typeMetaAttributeTypes = inspector.GetTypeMetaAttributeTypes(that);
+            var fieldMetaAttributeTypes = inspector.GetFieldMetaAttributeTypes(that);
+            var methodMetaAttributeTypes = inspector.GetMethodMetaAttributeTypes(that);
+            var methodParameterMetaAttributeTypes = inspector.GetMethodParameterMetaAttributeTypes(that);
+            var fieldTypes = inspector.GetFieldTypes(that);
+            var propertyTypes = inspector.GetPropertyTypes(that);
+            var methodReturnTypes = inspector.GetMethodReturnTypes(that);
+            var methodParameterTypes = inspector.GetMethodParameterTypes(that);
+            var ctorParameterTypes = inspector.GetCtorParameterTypes(that);
 
             return new[] { that.BaseType }
-                .Union(that.GetReferencedTypesByNewobjInstruction())
+                .Union(referencedTypesByNewobjInstruction)
                 .Union(typeMetaAttributeTypes)
                 .Union(fieldMetaAttributeTypes)
                 .Union(methodMetaAttributeTypes)

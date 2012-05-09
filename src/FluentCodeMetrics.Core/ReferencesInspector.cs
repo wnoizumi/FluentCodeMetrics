@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
+
 using FluentCodeMetrics.Core.Cecil;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 
 namespace FluentCodeMetrics.Core
 {
-    public static class ReferencesInspector
+    public class ReferencesInspector
     {
         private const BindingFlags Flags = BindingFlags.Static |
                                            BindingFlags.Instance |
                                            BindingFlags.NonPublic |
                                            BindingFlags.Public;
 
-        public static IEnumerable<Type>
-            GetReferencedTypesByNewobjInstruction(this Type that)
+        public IEnumerable<Type>
+            GetReferencedTypesByNewobjInstruction(Type that)
         {
             var assembly = AssemblyCache.Load(that.Assembly.GetName().Name);
             var typeDef = assembly.MainModule.Types
@@ -34,7 +34,7 @@ namespace FluentCodeMetrics.Core
                 select type;
         }
 
-        public static IEnumerable<Type> GetCtorParameterTypes(Type that)
+        public IEnumerable<Type> GetCtorParameterTypes(Type that)
         {
             return    
                 from ctor in that.GetConstructors(Flags)
@@ -42,7 +42,7 @@ namespace FluentCodeMetrics.Core
                 select parameter.ParameterType;
         }
 
-        public static IEnumerable<Type> GetMethodParameterTypes(Type that)
+        public IEnumerable<Type> GetMethodParameterTypes(Type that)
         {
             return    
                 from method in that.GetMethods(Flags)
@@ -50,7 +50,7 @@ namespace FluentCodeMetrics.Core
                 select parameter.ParameterType;
         }
 
-        public static IEnumerable<Type> GetMethodReturnTypes(Type that)
+        public IEnumerable<Type> GetMethodReturnTypes(Type that)
         {
             return    
                 from method in that.GetMethods(Flags)
@@ -58,21 +58,21 @@ namespace FluentCodeMetrics.Core
                 select method.ReturnType;
         }
 
-        public static IEnumerable<Type> GetPropertyTypes(Type that)
+        public IEnumerable<Type> GetPropertyTypes(Type that)
         {
             return    
                 from property in that.GetProperties(Flags)
                 select property.PropertyType;
         }
 
-        public static IEnumerable<Type> GetFieldTypes(Type that)
+        public IEnumerable<Type> GetFieldTypes(Type that)
         {
             return    
                 from field in that.GetFields(Flags)
                 select field.FieldType;
         }
 
-        public static IEnumerable<Type> GetMethodParameterMetaAttributeTypes(Type that)
+        public IEnumerable<Type> GetMethodParameterMetaAttributeTypes(Type that)
         {
             return    
                 from method in that.GetMethods(Flags)
@@ -81,7 +81,7 @@ namespace FluentCodeMetrics.Core
                 select attribute.GetType();
         }
 
-        public static IEnumerable<Type> GetMethodMetaAttributeTypes(Type that)
+        public IEnumerable<Type> GetMethodMetaAttributeTypes(Type that)
         {
             return    
                 from method in that.GetMethods(Flags)
@@ -89,7 +89,7 @@ namespace FluentCodeMetrics.Core
                 select attribute.GetType();
         }
 
-        public static IEnumerable<Type> GetFieldMetaAttributeTypes(Type that)
+        public IEnumerable<Type> GetFieldMetaAttributeTypes(Type that)
         {
             return
                 from field in that.GetFields(Flags)
@@ -97,7 +97,7 @@ namespace FluentCodeMetrics.Core
                 select attribute.GetType();
         }
 
-        public static IEnumerable<Type> GetTypeMetaAttributeTypes(Type that)
+        public IEnumerable<Type> GetTypeMetaAttributeTypes(Type that)
         {
             return
                 from attribute in that.GetCustomAttributes(true)
