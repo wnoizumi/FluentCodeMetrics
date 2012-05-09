@@ -35,14 +35,14 @@ namespace FluentCodeMetrics.Core
                                            BindingFlags.NonPublic |
                                            BindingFlags.Public;
 
-        public IEnumerable<Type>
-            ByNewobjInstruction()
+        public ReferencedTypes
+            OfNewobjInstruction()
         {
             var assembly = AssemblyCache.Load(workingType.Assembly.GetName().Name);
             var typeDef = assembly.MainModule.Types
                 .First(type => type.FullName == workingType.FullName);
 
-            return
+            var source = 
                 from method in typeDef.Methods
                 from instruction in method.Body.Instructions
                 where instruction.OpCode == OpCodes.Newobj
@@ -51,84 +51,98 @@ namespace FluentCodeMetrics.Core
                 let type = Type.GetType(typeFullName)
                 where type != null
                 select type;
+
+            return new ReferencedTypes(source);
         }
 
-        public IEnumerable<Type> 
-            ByCtorParametersTypes()
+        public ReferencedTypes 
+            OfCtorParametersTypes()
         {
-            return    
+            var source =    
                 from ctor in workingType.GetConstructors(Flags)
                 from parameter in ctor.GetParameters()
                 select parameter.ParameterType;
+            return new ReferencedTypes(source);
         }
 
-        public IEnumerable<Type> 
-            ByMethodsParametersTypes()
+        public ReferencedTypes 
+            OfMethodsParametersTypes()
         {
-            return    
+            var source =    
                 from method in workingType.GetMethods(Flags)
                 from parameter in method.GetParameters()
                 select parameter.ParameterType;
+
+            return new ReferencedTypes(source);
         }
 
-        public IEnumerable<Type> 
-            ByMethodsReturnTypes()
+        public ReferencedTypes 
+            OfMethodsReturnTypes()
         {
-            return    
+            var source =     
                 from method in workingType.GetMethods(Flags)
                 where method.ReturnType != typeof(void)
                 select method.ReturnType;
+
+            return new ReferencedTypes(source);
         }
 
-        public IEnumerable<Type> 
-            ByPropertiesTypes()
+        public ReferencedTypes 
+            OfPropertiesTypes()
         {
-            return    
+            var source =     
                 from property in workingType.GetProperties(Flags)
                 select property.PropertyType;
+            return new ReferencedTypes(source);
         }
 
-        public IEnumerable<Type> 
-            ByFieldsTypes()
+        public ReferencedTypes 
+            OfFieldsTypes()
         {
-            return    
+            var source =    
                 from field in workingType.GetFields(Flags)
                 select field.FieldType;
+            return new ReferencedTypes(source);
         }
 
-        public IEnumerable<Type> 
-            ByParametersMetaAttributesTypes()
+        public ReferencedTypes 
+            OfParametersMetaAttributesTypes()
         {
-            return    
+            var source =   
                 from method in workingType.GetMethods(Flags)
                 from parameter in method.GetParameters()
                 from attribute in parameter.GetCustomAttributes(true)
                 select attribute.GetType();
+            return new ReferencedTypes(source);
         }
 
-        public IEnumerable<Type> 
+        public ReferencedTypes 
             OfMethodsMetaAttributesTypes()
         {
-            return    
+            var source =   
                 from method in workingType.GetMethods(Flags)
                 from attribute in method.GetCustomAttributes(true)
                 select attribute.GetType();
+            return new ReferencedTypes(source);
         }
 
-        public IEnumerable<Type> 
+        public ReferencedTypes 
             OfFieldsMetaAttributesTypes()
         {
-            return
+            var source = 
                 from field in workingType.GetFields(Flags)
                 from attribute in field.GetCustomAttributes(true)
                 select attribute.GetType();
+            return new ReferencedTypes(source);
         }
 
-        public IEnumerable<Type> OfMetaAttributesTypes()
+        public ReferencedTypes 
+            OfMetaAttributesTypes()
         {
-            return
+            var source = 
                 from attribute in workingType.GetCustomAttributes(true)
                 select attribute.GetType();
+            return new ReferencedTypes(source);
         }
     }
 }
