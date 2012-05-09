@@ -55,6 +55,7 @@
     <Compile Include="CeExtensions.cs" />
     <Compile Include="Cecil\AssemblyCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReferencesInspector.cs" />
     <Compile Include="TypeFilters\AndTypeFilter.cs" />
     <Compile Include="TypeFilters\EqualsToTypeFilter.cs" />
     <Compile Include="TypeFilters\NotTypeFilter.cs" />
