@@ -11,10 +11,8 @@ namespace FluentCodeMetrics.Core
 {
     public class ReferencesInspector
     {
-        // ReSharper disable InconsistentNaming
         private readonly Type workingType;
         private readonly IEnumerable<Type> other;
-        // ReSharper restore InconsistentNaming
 
         internal ReferencesInspector(Type type, IEnumerable<Type> other) 
         {

@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Collections.Generic;
-using System.Reflection;
-using Mono.Cecil;
-using FluentCodeMetrics.Core.Cecil;
-using Mono.Cecil.Cil;
 using TypeFilter = FluentCodeMetrics.Core.TypeFilters.TypeFilter;
 
 namespace FluentCodeMetrics.Core
