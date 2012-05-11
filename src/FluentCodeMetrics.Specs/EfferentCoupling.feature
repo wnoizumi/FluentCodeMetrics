@@ -8,6 +8,7 @@ Funcionalidade: Calcular Acoplamento Eferente (Ce)
 	Entram na contagem: classe base, interfaces implementadas, 
 	tipos dos variáveis locais, atributos e das propriedades, 
 	tipos dos parâmetros em métodos e construtores, exceptions,
+	propriedades e métodos estáticos (obrigado @pedroreys),
 	eventos e atributos (obrigado @IsraelAece).
 
 	Como o objetivo é identificar a "complexidade" de um tipo,
@@ -45,6 +46,7 @@ Funcionalidade: Calcular Acoplamento Eferente (Ce)
 			| Samples.SingleNonAutoProperty     | 9  |
 			| Samples.SingleEvent               | 9  |
 			| Samples.Attributes                | 12 |
+			| Samples.StaticMember              | 10 |
 
 
 

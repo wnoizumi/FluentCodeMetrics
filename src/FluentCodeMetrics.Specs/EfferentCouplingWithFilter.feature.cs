@@ -78,6 +78,7 @@ namespace FluentCodeMetrics.Specs
         [NUnit.Framework.TestCaseAttribute("Samples.SingleNonAutoProperty", "1", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.SingleEvent", "1", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.Attributes", "4", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.StaticMember", "1", new string[0])]
         public virtual void CalcularAcoplamentoEferenteParaUmTipo(string tipo, string ce, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calcular Acoplamento Eferente para um tipo", exampleTags);

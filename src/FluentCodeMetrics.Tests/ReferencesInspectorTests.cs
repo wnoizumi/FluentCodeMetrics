@@ -149,3 +149,4 @@ namespace FluentCodeMetrics.Tests
     }
     // ReSharper restore InconsistentNaming
 }
+

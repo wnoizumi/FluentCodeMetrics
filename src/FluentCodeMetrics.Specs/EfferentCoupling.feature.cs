@@ -39,6 +39,7 @@ de referências de um tipo para outros.
 Entram na contagem: classe base, interfaces implementadas, 
 tipos dos variáveis locais, atributos e das propriedades, 
 tipos dos parâmetros em métodos e construtores, exceptions,
+propriedades e métodos estáticos (obrigado @pedroreys),
 eventos e atributos (obrigado @IsraelAece).
 
 Como o objetivo é identificar a ""complexidade"" de um tipo,
@@ -87,16 +88,17 @@ considero também as referências ""herdadas"".", ProgrammingLanguage.CSharp, ((
         [NUnit.Framework.TestCaseAttribute("Samples.SingleNonAutoProperty", "9", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.SingleEvent", "9", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.Attributes", "12", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.StaticMember", "10", new string[0])]
         public virtual void CalcularAcoplamentoEferenteParaUmTipo(string tipo, string ce, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calcular Acoplamento Eferente para um tipo", exampleTags);
-#line 16
- this.ScenarioSetup(scenarioInfo);
 #line 17
-  testRunner.Given(string.Format("que tenho um {0}", tipo));
+ this.ScenarioSetup(scenarioInfo);
 #line 18
-  testRunner.When("inspeciono seu acoplamento eferente");
+  testRunner.Given(string.Format("que tenho um {0}", tipo));
 #line 19
+  testRunner.When("inspeciono seu acoplamento eferente");
+#line 20
   testRunner.Then(string.Format("obtenho {0}", ce));
 #line hidden
             this.ScenarioCleanup();
