@@ -89,6 +89,14 @@ namespace Samples
         public void FooMethod([FooAttribute2] int foo) {}
     }
 
+    public class StaticPropertyAndMethodCall
+    {
+        public void DoNothing()
+        {
+            Console.WriteLine(DateTime.Now);
+        }
+    }
+
     public class FooAttribute : Attribute
     {
     }

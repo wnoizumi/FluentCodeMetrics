@@ -11,6 +11,9 @@ Funcionalidade: Calcular Acoplamento Eferente (Ce)
 	propriedades e métodos estáticos (obrigado @pedroreys),
 	eventos e atributos (obrigado @IsraelAece).
 
+	Importante destacar que Nested Types devem ser ignorados 
+	(obrigado @wnoizumi)
+
 	Como o objetivo é identificar a "complexidade" de um tipo,
 	considero também as referências "herdadas".
 
@@ -34,20 +37,21 @@ Funcionalidade: Calcular Acoplamento Eferente (Ce)
 		#
 
 		Exemplos: 
-			| tipo                              | ce |
-			| Samples.EmptyClass                | 8  |
-			| Samples.SingleArgCtor             | 9  |
-			| Samples.SingleArgVoidMethod       | 9  |
-			| Samples.FeeMethod                 | 9  |
-			| Samples.DateTimeArgDateTimeMethod | 9  |
-			| Samples.SingleProperty            | 10 |
-			| Samples.SingleField               | 9  |
-			| Samples.ExceptionRaiser           | 9  |
-			| Samples.SingleNonAutoProperty     | 9  |
-			| Samples.SingleEvent               | 9  |
-			| Samples.Attributes                | 12 |
-			| Samples.StaticMember              | 10 |
-			| Samples.ClassDependsOnASubClass   | 8  |
+			| tipo                                | ce |
+			| Samples.EmptyClass                  | 8  |
+			| Samples.SingleArgCtor               | 9  |
+			| Samples.SingleArgVoidMethod         | 9  |
+			| Samples.FeeMethod                   | 9  |
+			| Samples.DateTimeArgDateTimeMethod   | 9  |
+			| Samples.SingleProperty              | 10 |
+			| Samples.SingleField                 | 9  |
+			| Samples.ExceptionRaiser             | 9  |
+			| Samples.SingleNonAutoProperty       | 9  |
+			| Samples.SingleEvent                 | 9  |
+			| Samples.Attributes                  | 12 |
+			| Samples.StaticMember                | 10 |
+			| Samples.ClassDependsOnASubClass     | 8  |
+			| Samples.StaticPropertyAndMethodCall | 10 |
 
 
 

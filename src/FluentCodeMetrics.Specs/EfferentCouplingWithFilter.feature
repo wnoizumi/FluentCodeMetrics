@@ -21,20 +21,21 @@ Funcionalidade: Calcular Acoplamento Eferente (Ce) com um Filtro
 		Então obtenho <ce>
 
 		Exemplos: 
-			| tipo                              | ce |
-			| Samples.EmptyClass                | 0  |
-			| Samples.SingleArgCtor             | 1  |
-			| Samples.SingleArgVoidMethod       | 1  |
-			| Samples.FeeMethod                 | 1  |
-			| Samples.DateTimeArgDateTimeMethod | 1  |
-			| Samples.SingleProperty            | 1  |
-			| Samples.SingleField               | 1  |
-			| Samples.ExceptionRaiser           | 1  |
-			| Samples.SingleNonAutoProperty     | 1  |
-			| Samples.SingleEvent               | 1  |
-			| Samples.Attributes                | 4  |
-			| Samples.StaticMember              | 1  |
-			| Samples.ClassDependsOnASubClass   | 0  |
+			| tipo                                | ce |
+			| Samples.EmptyClass                  | 0  |
+			| Samples.SingleArgCtor               | 1  |
+			| Samples.SingleArgVoidMethod         | 1  |
+			| Samples.FeeMethod                   | 1  |
+			| Samples.DateTimeArgDateTimeMethod   | 1  |
+			| Samples.SingleProperty              | 1  |
+			| Samples.SingleField                 | 1  |
+			| Samples.ExceptionRaiser             | 1  |
+			| Samples.SingleNonAutoProperty       | 1  |
+			| Samples.SingleEvent                 | 1  |
+			| Samples.Attributes                  | 4  |
+			| Samples.StaticMember                | 1  |
+			| Samples.ClassDependsOnASubClass     | 0  |
+			| Samples.StaticPropertyAndMethodCall | 2  |
 
 
 

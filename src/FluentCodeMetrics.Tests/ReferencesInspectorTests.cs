@@ -146,6 +146,21 @@ namespace FluentCodeMetrics.Tests
                     })
                  );
         }
+
+        [Test]
+        public void FromStaticMethodCalls_StaticPropertyAndMethodCall()
+        {
+            ReferencesInspector.For<StaticPropertyAndMethodCall>()
+                .FromStaticMethodCalls()
+                .FilterBy(typeof(object).Not())
+                .Should().Have.SameValuesAs(
+                    new[]
+                        {
+                            typeof (Console),
+                            typeof (DateTime)
+                        }
+                );
+        }
     }
     // ReSharper restore InconsistentNaming
 }
