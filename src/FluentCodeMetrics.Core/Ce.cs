@@ -30,12 +30,16 @@ namespace FluentCodeMetrics.Core
             return FilterBy(toIgnore.Not());
         }
 
+        public Ce Ignoring<T>()
+        {
+            return Ignoring(typeof (T));
+        }
+
         public Ce FilterBy(TypeFilter filter)
         {
-            if (filter == null)
-                return this;
-
-            return new Ce(references.FilterBy(filter));
+            return filter == null ? 
+                this : 
+                new Ce(references.FilterBy(filter));
         }
 
         public static implicit operator int(Ce source)
