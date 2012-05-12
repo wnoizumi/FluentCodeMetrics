@@ -49,6 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\FluentCodeMetrics.Specs\Samples.cs">
+      <Link>Samples.cs</Link>
+    </Compile>
     <Compile Include="ReferencesInspectorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TypeFilterTests.cs" />
@@ -60,10 +63,6 @@
     <ProjectReference Include="..\FluentCodeMetrics.Core\FluentCodeMetrics.Core.csproj">
       <Project>{76E1A53D-F8EB-4AD1-A589-F7E6059E0503}</Project>
       <Name>FluentCodeMetrics.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FluentCodeMetrics.Specs\FluentCodeMetrics.Specs.csproj">
-      <Project>{D44688D3-71FB-40FC-AFAF-6FA9073AF154}</Project>
-      <Name>FluentCodeMetrics.Specs</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -12,4 +12,6 @@ TestResult.xml
 *.pdb
 */*.ncrunchsolution*
 src/GlobalInfo.cs
-._.gitignore.*
+._*
+*.ncrunchproject
+*.cache
