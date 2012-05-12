@@ -8,14 +8,12 @@ namespace FluentCodeMetrics.Core.TypeFilters
 
         public TypeFilter Or(TypeFilter filter)
         {
-            if (filter == null) return this;
-            return new OrTypeFilter(this, filter);
+            return TypeFilter.Or(this, filter);
         }
 
         public TypeFilter And(TypeFilter filter)
         {
-            if (filter == null) return this;
-            return new AndTypeFilter(this, filter);
+            return TypeFilter.And(this, filter);
         }
 
         public TypeFilter Not()
@@ -35,11 +33,23 @@ namespace FluentCodeMetrics.Core.TypeFilters
 
         public static TypeFilter And(TypeFilter left, TypeFilter right)
         {
+            if (left == null)
+                return right;
+
+            if (right == null)
+                return left;
+
             return new AndTypeFilter(left, right);
         }
 
         public static TypeFilter Or(TypeFilter left, TypeFilter right)
         {
+            if (left == null)
+                return right;
+
+            if (right == null)
+                return left;
+
             return new OrTypeFilter(left, right);
         }
 
