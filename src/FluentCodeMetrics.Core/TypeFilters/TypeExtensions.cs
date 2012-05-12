@@ -20,5 +20,10 @@ namespace FluentCodeMetrics.Core.TypeFilters
         {
             return TypeFilter.Not(that);
         }
+
+        public static TypeFilter NestedTypes(this Type that)
+        {
+            return TypeFilter.NestedTypes(that);
+        }
     }
 }

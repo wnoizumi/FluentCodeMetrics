@@ -1,5 +1,5 @@
 ﻿using System;
-
+using Samples;
 using SharpTestsEx;
 using NUnit.Framework;
 
@@ -59,6 +59,16 @@ namespace FluentCodeMetrics.Tests
                 .Check(type)
                 .Should().Be(expected);
 
+        }
+
+        [Test]
+        [TestCase(typeof(ClassDependsOnASubClass), typeof(ClassDependsOnASubClass.SubClass))]
+        public void NotNestedTypes(Type declaringType, Type nestedType)
+        {
+            declaringType.NestedTypes()
+                .Check(nestedType)
+                .Should()
+                .Be(true);
         }
     }
 }

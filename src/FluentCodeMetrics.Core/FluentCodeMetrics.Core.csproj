@@ -59,6 +59,7 @@
     <Compile Include="ReferencesInspector.cs" />
     <Compile Include="TypeFilters\AndTypeFilter.cs" />
     <Compile Include="TypeFilters\EqualsToTypeFilter.cs" />
+    <Compile Include="TypeFilters\NestedTypesTypeFilter.cs" />
     <Compile Include="TypeFilters\NotTypeFilter.cs" />
     <Compile Include="TypeFilters\OrTypeFilter.cs" />
     <Compile Include="TypeFilters\TypeExtensions.cs" />

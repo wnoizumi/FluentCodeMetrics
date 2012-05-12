@@ -45,5 +45,10 @@ namespace FluentCodeMetrics.Core.TypeFilters
         {
             return new EqualsToTypeFilter(type);
         }
+
+        internal static TypeFilter NestedTypes(Type declaringType)
+        {
+            return new NestedTypesTypeFilter(declaringType);
+        }
     }
 }

@@ -89,13 +89,7 @@ namespace Samples
         public void FooMethod([FooAttribute2] int foo) {}
     }
 
-    public class StaticPropertyAndMethodCall
-    {
-        public void DoNothing()
-        {
-            Console.WriteLine(DateTime.Now);
-        }
-    }
+    
 
     public class FooAttribute : Attribute
     {
@@ -112,11 +106,17 @@ namespace Samples
 
     public class ClassDependsOnASubClass
     {
-// ReSharper disable UnusedMember.Local
         private SubClass foo;
-// ReSharper restore UnusedMember.Local
 
         public class SubClass
         {}
+    }
+
+    public class StaticPropertyAndMethodCall
+    {
+        public void DoNothing()
+        {
+            Console.WriteLine(DateTime.Now);
+        }
     }
 }

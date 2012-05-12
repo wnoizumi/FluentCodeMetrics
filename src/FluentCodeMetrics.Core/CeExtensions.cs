@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using TypeFilter = FluentCodeMetrics.Core.TypeFilters.TypeFilter;
+using FluentCodeMetrics.Core.TypeFilters;
 
 namespace FluentCodeMetrics.Core
 {
@@ -10,7 +10,7 @@ namespace FluentCodeMetrics.Core
         {
             return ReferencesInspector.For(that)
                 .All()
-                .Where(t=> t.DeclaringType != that)
+                .FilterBy(that.NestedTypes().Not())
                 .Count();
         }
 
@@ -18,8 +18,10 @@ namespace FluentCodeMetrics.Core
         {
             return ReferencesInspector.For(that)
                 .All()                
-                .FilterBy(filter)
-                .Where(t => t.DeclaringType != that)
+                .FilterBy(
+                    that.NestedTypes().Not()
+                    .And(filter)
+                    )
                 .Count();
         }
     }

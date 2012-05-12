@@ -184,7 +184,8 @@ namespace FluentCodeMetrics.Core
         public ReferencedTypes
             All()
         {
-            return new ReferencedTypes(FromBaseType()
+            return new ReferencedTypes(
+                FromBaseType()
                 .And.FromNewobjInstructions()
                 .And.FromMetaAttributes()
                 .And.FromFieldsMetaAttributes()
@@ -196,7 +197,10 @@ namespace FluentCodeMetrics.Core
                 .And.FromMethodsParameters()
                 .And.FromCtorParameters()
                 .And.FromStaticMethodCalls()
-                .Distinct(), workingType);
+                .Distinct()
+                ,
+                workingType
+                );
         }
 
         
