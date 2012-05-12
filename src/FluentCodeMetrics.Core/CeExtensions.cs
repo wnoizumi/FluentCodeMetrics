@@ -9,12 +9,9 @@ namespace FluentCodeMetrics.Core
         
         public static int ComputeCe(this Type that, TypeFilter filter = null)
         {
-            return ReferencesInspector.For(that)
-                .Where(
-                    that.NestedTypes().Not()
-                    .And(filter)
-                    )
-                .Count();
+            return Ce
+                .For(that)
+                .FilterBy(filter);
         }
     }
 }
