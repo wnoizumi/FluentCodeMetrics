@@ -101,4 +101,14 @@ namespace Samples
     {
         public static DateTime Foo { get; set; }
     }
+
+    public class ClassDependsOnASubClass
+    {
+// ReSharper disable UnusedMember.Local
+        private SubClass foo;
+// ReSharper restore UnusedMember.Local
+
+        public class SubClass
+        {}
+    }
 }

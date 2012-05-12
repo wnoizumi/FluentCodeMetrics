@@ -15,16 +15,16 @@ namespace FluentCodeMetrics.Core
         {
             return ReferencesInspector.For(that)
                 .All()
+                .Where(t=> t.DeclaringType != that)
                 .Count();
         }
-
-
 
         public static int ComputeCe(this Type that, TypeFilter filter)
         {
             return ReferencesInspector.For(that)
-                .All()
+                .All()                
                 .FilterBy(filter)
+                .Where(t => t.DeclaringType != that)
                 .Count();
         }
     }

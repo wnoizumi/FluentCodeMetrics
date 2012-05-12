@@ -34,6 +34,7 @@ Funcionalidade: Calcular Acoplamento Eferente (Ce) com um Filtro
 			| Samples.SingleEvent               | 1  |
 			| Samples.Attributes                | 4  |
 			| Samples.StaticMember              | 1  |
+			| Samples.ClassDependsOnASubClass   | 0  |
 
 
 

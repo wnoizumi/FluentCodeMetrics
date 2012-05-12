@@ -47,7 +47,7 @@ Funcionalidade: Calcular Acoplamento Eferente (Ce)
 			| Samples.SingleEvent               | 9  |
 			| Samples.Attributes                | 12 |
 			| Samples.StaticMember              | 10 |
-
+			| Samples.ClassDependsOnASubClass   | 8  |
 
 
 
