@@ -56,14 +56,26 @@ namespace FluentCodeMetrics.Core
         public ReferencedTypes
             FromNewobjInstructions()
         {
+            return FromMethodReferences(OpCodes.Newobj);
+        }
+
+        public ReferencedTypes
+            FromStaticMethodCalls()
+        {
+            return FromMethodReferences(OpCodes.Call);
+        }
+
+        ReferencedTypes 
+            FromMethodReferences (OpCode opCode)
+        {
             var assembly = AssemblyCache.Load(workingType.Assembly.GetName().Name);
             var typeDef = assembly.MainModule.Types
                 .First(type => type.FullName == workingType.FullName);
 
-            var source = 
+            var source =
                 from method in typeDef.Methods
                 from instruction in method.Body.Instructions
-                where instruction.OpCode == OpCodes.Newobj
+                where instruction.OpCode == opCode
                 let operand = instruction.Operand as MethodReference
                 let typeFullName = operand.DeclaringType.FullName
                 let type = Type.GetType(typeFullName)
@@ -163,25 +175,7 @@ namespace FluentCodeMetrics.Core
             return new ReferencedTypes(other.Union(source), workingType);
         }
 
-        public ReferencedTypes
-            FromStaticMethodCalls()
-        {
-            var assembly = AssemblyCache.Load(workingType.Assembly.GetName().Name);
-            var typeDef = assembly.MainModule.Types
-                .First(type => type.FullName == workingType.FullName);
-
-            var source =
-                from method in typeDef.Methods
-                from instruction in method.Body.Instructions
-                where instruction.OpCode == OpCodes.Call
-                let operand = instruction.Operand as MethodReference
-                let typeFullName = operand.DeclaringType.FullName
-                let type = Type.GetType(typeFullName)
-                where type != null
-                select type;
-
-            return new ReferencedTypes(other.Union(source), workingType);
-        }
+        
 
         public ReferencedTypes
             All()
