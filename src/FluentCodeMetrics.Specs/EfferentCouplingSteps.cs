@@ -9,11 +9,9 @@ namespace FluentCodeMetrics.Specs
     [Binding]
     public class EfferentCouplingSteps
     {
-        // ReSharper disable InconsistentNaming
         private int resultingCe;
         private Type workingType;
         private TypeFilter filter;
-        // ReSharper restore InconsistentNaming
 
         [Given(@"que tenho um (.*)")]
         public void DadoQueTenhoUm(string tipo)
