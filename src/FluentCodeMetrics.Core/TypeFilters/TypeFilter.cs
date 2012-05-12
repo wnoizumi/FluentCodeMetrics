@@ -8,11 +8,13 @@ namespace FluentCodeMetrics.Core.TypeFilters
 
         public TypeFilter Or(TypeFilter filter)
         {
+            if (filter == null) return this;
             return new OrTypeFilter(this, filter);
         }
 
         public TypeFilter And(TypeFilter filter)
         {
+            if (filter == null) return this;
             return new AndTypeFilter(this, filter);
         }
 

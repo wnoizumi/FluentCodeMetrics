@@ -6,19 +6,11 @@ namespace FluentCodeMetrics.Core
 {
     public static class CeExtensions
     {
-        public static int ComputeCe(this Type that)
+        
+        public static int ComputeCe(this Type that, TypeFilter filter = null)
         {
             return ReferencesInspector.For(that)
-                .All()
-                .FilterBy(that.NestedTypes().Not())
-                .Count();
-        }
-
-        public static int ComputeCe(this Type that, TypeFilter filter)
-        {
-            return ReferencesInspector.For(that)
-                .All()                
-                .FilterBy(
+                .Where(
                     that.NestedTypes().Not()
                     .And(filter)
                     )

@@ -7,6 +7,8 @@ using FluentCodeMetrics.Core.Cecil;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 
+using TypeFilter = FluentCodeMetrics.Core.TypeFilters.TypeFilter;
+
 namespace FluentCodeMetrics.Core
 {
     public class ReferencesInspector
@@ -201,6 +203,12 @@ namespace FluentCodeMetrics.Core
                 ,
                 workingType
                 );
+        }
+
+        public ReferencedTypes
+            Where(TypeFilter filter)
+        {
+            return All().FilterBy(filter);
         }
 
         
