@@ -116,6 +116,41 @@ namespace FluentCodeMetrics.Specs
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Calcular Acoplamento Eferente para um tipo, considerando apenas tipos do mesmo as" +
+            "sembly")]
+        [NUnit.Framework.TestCaseAttribute("Samples.EmptyClass", "0", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.SingleArgCtor", "1", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.SingleArgVoidMethod", "1", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.FeeMethod", "1", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.DateTimeArgDateTimeMethod", "0", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.SingleProperty", "0", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.SingleField", "0", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.ExceptionRaiser", "0", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.SingleNonAutoProperty", "0", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.SingleEvent", "0", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.Attributes", "2", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.StaticMember", "0", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.ClassDependsOnASubClass", "0", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.StaticPropertyAndMethodCall", "0", new string[0])]
+        public virtual void CalcularAcoplamentoEferenteParaUmTipoConsiderandoApenasTiposDoMesmoAssembly(string tipo, string ce, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calcular Acoplamento Eferente para um tipo, considerando apenas tipos do mesmo as" +
+                    "sembly", exampleTags);
+#line 40
+ this.ScenarioSetup(scenarioInfo);
+#line 41
+  testRunner.Given(string.Format("que tenho um {0}", tipo));
+#line 42
+  testRunner.When("desejo obter seu acoplamento eferente");
+#line 43
+  testRunner.And("desejo ignorar referências para tipos de outros assemblies");
+#line 44
+  testRunner.Then(string.Format("obtenho {0}", ce));
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

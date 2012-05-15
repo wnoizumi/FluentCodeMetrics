@@ -2,7 +2,6 @@
 using FluentCodeMetrics.Core;
 using SharpTestsEx;
 using TechTalk.SpecFlow;
-using FluentCodeMetrics.Core.TypeFilters;
 
 namespace FluentCodeMetrics.Specs
 {
@@ -10,8 +9,7 @@ namespace FluentCodeMetrics.Specs
     public class EfferentCouplingSteps
     {
         private Ce resultingCe;
-        private TypeFilter filter;
-
+        
         [Given(@"que tenho um (.*)")]
         public void DadoQueTenhoUm(string tipo)
         {

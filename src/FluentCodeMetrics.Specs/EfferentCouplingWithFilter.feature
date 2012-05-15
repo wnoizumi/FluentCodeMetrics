@@ -37,6 +37,29 @@ Funcionalidade: Calcular Acoplamento Eferente (Ce) com um Filtro
 			| Samples.ClassDependsOnASubClass     | 0  |
 			| Samples.StaticPropertyAndMethodCall | 2  |
 
+	Esquema do Cenário: Calcular Acoplamento Eferente para um tipo, considerando apenas tipos do mesmo assembly
+		Dado que tenho um <tipo>
+		Quando desejo obter seu acoplamento eferente
+		E desejo ignorar referências para tipos de outros assemblies
+		Então obtenho <ce>
+
+		Exemplos: 
+			| tipo                                | ce |
+			| Samples.EmptyClass                  | 0  |
+			| Samples.SingleArgCtor               | 1  |
+			| Samples.SingleArgVoidMethod         | 1  |
+			| Samples.FeeMethod                   | 1  |
+			| Samples.DateTimeArgDateTimeMethod   | 0  |
+			| Samples.SingleProperty              | 0  |
+			| Samples.SingleField                 | 0  |
+			| Samples.ExceptionRaiser             | 0  |
+			| Samples.SingleNonAutoProperty       | 0  |
+			| Samples.SingleEvent                 | 0  |
+			| Samples.Attributes                  | 2  |
+			| Samples.StaticMember                | 0  |
+			| Samples.ClassDependsOnASubClass     | 0  |
+			| Samples.StaticPropertyAndMethodCall | 0  |
+
 
 
 
