@@ -3,6 +3,7 @@
 using NUnit.Framework;
 using SharpTestsEx;
 using FluentCodeMetrics.Core;
+using FluentCodeMetrics.Core.TypeSets;
 
 namespace FluentCodeMetrics.Tests
 {
@@ -10,7 +11,7 @@ namespace FluentCodeMetrics.Tests
     public class CeTests
     {
         [Test]
-        public void Ce_ForSingleArgCtorIgnoringObject()
+        public void Ce_ForSingleArgCtorIgnoringCommonTypes()
         {
             var ce = Ce.For<Samples.SingleArgCtor>()
                 .Ignoring<System.Runtime.TargetedPatchingOptOutAttribute>()
@@ -26,6 +27,40 @@ namespace FluentCodeMetrics.Tests
             ce.Value.Should().Be(1);
             ce.References.Should().Have.SameValuesAs(
                 new[] {typeof (Samples.Fee)}
+                );
+        }
+
+        [Test]
+        public void Ce_ForSingleArgCtorIgnoringTypeSet()
+        {
+            var ce = Ce.For<Samples.SingleArgCtor>()
+                .Ignoring(TypeSet.With(
+                    typeof(System.Runtime.TargetedPatchingOptOutAttribute),
+                    typeof(System.Security.SecuritySafeCriticalAttribute),
+                    typeof(System.Runtime.ConstrainedExecution.ReliabilityContractAttribute),
+                    typeof(System.Runtime.CompilerServices.CompilerGeneratedAttribute),
+                    typeof(object),
+                    typeof(int),
+                    typeof(string),
+                    typeof(bool),
+                    typeof(Type)
+                ));
+
+            ce.Value.Should().Be(1);
+            ce.References.Should().Have.SameValuesAs(
+                new[] { typeof(Samples.Fee) }
+                );
+        }
+
+        [Test]
+        public void Ce_ForSingleArgCtorIgnoringOtherAssembliesTypes()
+        {
+            var ce = Ce.For<Samples.SingleArgCtor>()
+                .Ignoring(typeof (Samples.SingleArgCtor).Assembly.Not());
+                
+            ce.Value.Should().Be(1);
+            ce.References.Should().Have.SameValuesAs(
+                new[] { typeof(Samples.Fee) }
                 );
         }
     }

@@ -2,28 +2,26 @@
 using System.Linq;
 
 using FluentCodeMetrics.Core.TypeFilters;
+using FluentCodeMetrics.Core.TypeSets;
+using System.Collections.Generic;
 
 namespace FluentCodeMetrics.Core
 {
-    public class Ce
+    public abstract class Ce
     {
-        public readonly ReferencedTypes references;
-        public ReferencedTypes References
-        { get { return references; } }
-
         public int Value
-        { get { return References.Count(); } }
-
-        private Ce(Type type)
         {
-            references = ReferencesInspector.For(type)
-                .Where(type.NestedTypes().Not());
+            get { return References.Count(); }
         }
 
-        private Ce(ReferencedTypes refs)
+        public abstract ReferencedTypesTypeSet References { get; }
+
+        public static implicit operator int(Ce source)
         {
-            references = refs;
+            return source.Value;
         }
+
+        public abstract Ce FilterBy(TypeFilter filter);
 
         public Ce Ignoring(TypeFilter toIgnore)
         {
@@ -32,29 +30,88 @@ namespace FluentCodeMetrics.Core
 
         public Ce Ignoring<T>()
         {
-            return Ignoring(typeof (T));
+            return Ignoring(typeof(T));
         }
 
-        public Ce FilterBy(TypeFilter filter)
+        public static TypeSetCe For(TypeSet typeSet)
         {
-            return filter == null ? 
-                this : 
-                new Ce(references.FilterBy(filter));
+            var source = from type in typeSet
+                         select For(type);
+
+            return new TypeSetCe(source);
         }
 
-        public static implicit operator int(Ce source)
+        public static TypeCe For(Type type)
         {
-            return source.Value;
+            var references = ReferencesInspector.For(type)
+                .Where(type.NestedTypes().Not());
+            return new TypeCe(references, type);
         }
 
-        public static Ce For(Type type)
-        {
-            return new Ce(type);
-        }
-
-        public static Ce For<T>()
+        public static TypeCe For<T>()
         {
             return For(typeof (T));
+        }
+    }
+
+   
+    public class TypeCe : Ce
+    {
+        private readonly ReferencedTypesTypeSet references;
+        private readonly Type type;
+        public Type Type
+        {
+            get { return type;  }
+        }
+
+        internal TypeCe(ReferencedTypesTypeSet refs, Type type)
+        {   
+            references = refs;
+            this.type = type;
+        }
+
+        public override ReferencedTypesTypeSet References
+        {
+            get { return references; }
+        }
+
+        public override Ce FilterBy(TypeFilter filter)
+        {
+            return filter == null ?
+                this :
+                new TypeCe(references.FilterBy(filter), Type);
+        }
+    }
+
+    public class TypeSetCe : Ce
+    {
+        private IEnumerable<Ce> source;
+
+        public IEnumerable<Ce> Source
+        {
+            get { return source; }
+        }
+
+        internal TypeSetCe(IEnumerable<Ce> source)
+        {
+            this.source = source;
+        }
+        
+        public override ReferencedTypesTypeSet References
+        {
+            get
+            {
+                var allReferences = from member in source
+                                    from reference in member.References
+                                    select reference;
+                return new ReferencedTypesTypeSet(allReferences.Distinct(), null);
+            }
+        }
+
+        public override Ce FilterBy(TypeFilter filter)
+        {
+            var newSource = source.Select(ceResult => ceResult.FilterBy(filter)).ToList();
+            return new TypeSetCe(newSource);
         }
     }
 }

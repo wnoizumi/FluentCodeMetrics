@@ -59,7 +59,8 @@
     <Compile Include="CeExtensions.cs" />
     <Compile Include="Cecil\AssemblyCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReferencedTypes.cs" />
+    <Compile Include="TypeFilters\CollectionTypeFilter.cs" />
+    <Compile Include="TypeSets\ReferencedTypesTypeSet.cs" />
     <Compile Include="ReferencesInspector.cs" />
     <Compile Include="TypeFilters\AndTypeFilter.cs" />
     <Compile Include="TypeFilters\EqualsToTypeFilter.cs" />
@@ -69,6 +70,8 @@
     <Compile Include="TypeFilters\OrTypeFilter.cs" />
     <Compile Include="TypeFilters\TypeFilterExtensions.cs" />
     <Compile Include="TypeFilters\TypeFilter.cs" />
+    <Compile Include="TypeSets\AssemblyTypeSet.cs" />
+    <Compile Include="TypeSets\CollectionTypeSet.cs" />
     <Compile Include="TypeSets\TypeSet.cs" />
     <Compile Include="TypeSets\TypeSetExtensions.cs" />
   </ItemGroup>

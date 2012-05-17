@@ -8,6 +8,7 @@ using Mono.Cecil;
 using Mono.Cecil.Cil;
 
 using TypeFilter = FluentCodeMetrics.Core.TypeFilters.TypeFilter;
+using FluentCodeMetrics.Core.TypeSets;
 
 namespace FluentCodeMetrics.Core
 {
@@ -44,33 +45,36 @@ namespace FluentCodeMetrics.Core
                                            BindingFlags.NonPublic |
                                            BindingFlags.Public;
 
-        public ReferencedTypes
+        public ReferencedTypesTypeSet
             FromBaseType()
         {
-            return new ReferencedTypes(
+            return new ReferencedTypesTypeSet(
                 new[] { workingType.BaseType },
                 workingType
                 );
         }
 
-        public ReferencedTypes
+        public ReferencedTypesTypeSet
             FromNewobjInstructions()
         {
             return FromMethodReferences(OpCodes.Newobj);
         }
 
-        public ReferencedTypes
+        public ReferencedTypesTypeSet
             FromStaticMethodCalls()
         {
             return FromMethodReferences(OpCodes.Call);
         }
 
-        ReferencedTypes 
+        ReferencedTypesTypeSet 
             FromMethodReferences (OpCode opCode)
         {
             var assembly = AssemblyCache.Load(workingType.Assembly.GetName().Name);
             var typeDef = assembly.MainModule.Types
-                .First(type => type.FullName == workingType.FullName);
+                .FirstOrDefault(type => type.FullName == workingType.FullName);
+
+            if (typeDef == null)
+                return new ReferencedTypesTypeSet(other, workingType);
 
             var source =
                 from method in typeDef.Methods
@@ -82,20 +86,20 @@ namespace FluentCodeMetrics.Core
                 where type != null
                 select type;
 
-            return new ReferencedTypes(other.Union(source), workingType);
+            return new ReferencedTypesTypeSet(other.Union(source), workingType);
         }
 
-        public ReferencedTypes 
+        public ReferencedTypesTypeSet 
             FromCtorParameters()
         {
             var source =    
                 from ctor in workingType.GetConstructors(Flags)
                 from parameter in ctor.GetParameters()
                 select parameter.ParameterType;
-            return new ReferencedTypes(other.Union(source), workingType);
+            return new ReferencedTypesTypeSet(other.Union(source), workingType);
         }
 
-        public ReferencedTypes 
+        public ReferencedTypesTypeSet 
             FromMethodsParameters()
         {
             var source =    
@@ -103,10 +107,10 @@ namespace FluentCodeMetrics.Core
                 from parameter in method.GetParameters()
                 select parameter.ParameterType;
 
-            return new ReferencedTypes(other.Union(source), workingType);
+            return new ReferencedTypesTypeSet(other.Union(source), workingType);
         }
 
-        public ReferencedTypes 
+        public ReferencedTypesTypeSet 
             FromMethodsReturnTypes()
         {
             var source =     
@@ -114,28 +118,28 @@ namespace FluentCodeMetrics.Core
                 where method.ReturnType != typeof(void)
                 select method.ReturnType;
 
-            return new ReferencedTypes(other.Union(source), workingType);
+            return new ReferencedTypesTypeSet(other.Union(source), workingType);
         }
 
-        public ReferencedTypes 
+        public ReferencedTypesTypeSet 
             FromProperties()
         {
             var source =     
                 from property in workingType.GetProperties(Flags)
                 select property.PropertyType;
-            return new ReferencedTypes(other.Union(source), workingType);
+            return new ReferencedTypesTypeSet(other.Union(source), workingType);
         }
 
-        public ReferencedTypes 
+        public ReferencedTypesTypeSet 
             FromFields()
         {
             var source =    
                 from field in workingType.GetFields(Flags)
                 select field.FieldType;
-            return new ReferencedTypes(other.Union(source), workingType);
+            return new ReferencedTypesTypeSet(other.Union(source), workingType);
         }
 
-        public ReferencedTypes 
+        public ReferencedTypesTypeSet 
             FromParametersMetaAttributes()
         {
             var source =   
@@ -143,44 +147,44 @@ namespace FluentCodeMetrics.Core
                 from parameter in method.GetParameters()
                 from attribute in parameter.GetCustomAttributes(true)
                 select attribute.GetType();
-            return new ReferencedTypes(other.Union(source), workingType);
+            return new ReferencedTypesTypeSet(other.Union(source), workingType);
         }
 
-        public ReferencedTypes 
+        public ReferencedTypesTypeSet 
             FromMethodsMetaAttributes()
         {
             var source =   
                 from method in workingType.GetMethods(Flags)
                 from attribute in method.GetCustomAttributes(true)
                 select attribute.GetType();
-            return new ReferencedTypes(other.Union(source), workingType);
+            return new ReferencedTypesTypeSet(other.Union(source), workingType);
         }
 
-        public ReferencedTypes 
+        public ReferencedTypesTypeSet 
             FromFieldsMetaAttributes()
         {
             var source = 
                 from field in workingType.GetFields(Flags)
                 from attribute in field.GetCustomAttributes(true)
                 select attribute.GetType();
-            return new ReferencedTypes(other.Union(source), workingType);
+            return new ReferencedTypesTypeSet(other.Union(source), workingType);
         }
 
-        public ReferencedTypes 
+        public ReferencedTypesTypeSet 
             FromMetaAttributes()
         {
             var source = 
                 from attribute in workingType.GetCustomAttributes(true)
                 select attribute.GetType();
-            return new ReferencedTypes(other.Union(source), workingType);
+            return new ReferencedTypesTypeSet(other.Union(source), workingType);
         }
 
         
 
-        public ReferencedTypes
+        public ReferencedTypesTypeSet
             All()
         {
-            return new ReferencedTypes(
+            return new ReferencedTypesTypeSet(
                 FromBaseType()
                 .And.FromNewobjInstructions()
                 .And.FromMetaAttributes()
@@ -199,7 +203,7 @@ namespace FluentCodeMetrics.Core
                 );
         }
 
-        public ReferencedTypes
+        public ReferencedTypesTypeSet
             Where(TypeFilter filter)
         {
             return All().FilterBy(filter);

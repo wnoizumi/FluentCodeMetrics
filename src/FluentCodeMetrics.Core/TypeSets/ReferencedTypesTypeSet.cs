@@ -3,28 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentCodeMetrics.Core.TypeFilters;
 
-namespace FluentCodeMetrics.Core
+namespace FluentCodeMetrics.Core.TypeSets
 {
-    public class ReferencedTypes : 
-        IEnumerable<Type>
+    public class ReferencedTypesTypeSet : 
+        TypeSet
     {
         private readonly IEnumerable<Type> sourceField;
         private readonly Type originalField;
 
-        internal ReferencedTypes(IEnumerable<Type> source, Type original)
+        internal ReferencedTypesTypeSet(IEnumerable<Type> source, Type original)
         {
             sourceField = source;
             originalField = original;
         }
 
-        public IEnumerator<Type> GetEnumerator()
+        public override IEnumerable<Type> GetAllTypes()
         {
-            return sourceField.GetEnumerator();
-        }
-
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            return sourceField.GetEnumerator();
+            return sourceField;
         }
 
         public ReferencesInspector And
@@ -38,14 +33,12 @@ namespace FluentCodeMetrics.Core
             }
         }
 
-        public ReferencedTypes FilterBy(TypeFilter filter)
+        public ReferencedTypesTypeSet FilterBy(TypeFilter filter)
         {
-            return new ReferencedTypes(
+            return new ReferencedTypesTypeSet(
                 sourceField.Where(filter.Check),
                 originalField
                 );
         }
-
-
     }
 }

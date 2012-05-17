@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using FluentCodeMetrics.Core.TypeSets;
 
 namespace FluentCodeMetrics.Core.TypeFilters
 {
@@ -30,6 +31,11 @@ namespace FluentCodeMetrics.Core.TypeFilters
         public static implicit operator TypeFilter(Assembly assembly)
         {
             return FromAssembly(assembly);
+        }
+
+        public static implicit operator TypeFilter(TypeSet set)
+        {
+            return new CollectionTypeFilter(set);
         }
 
         public static TypeFilter FromAssembly(Assembly assembly)

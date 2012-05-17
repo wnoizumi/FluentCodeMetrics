@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Linq;
 using FluentCodeMetrics.Core;
 
 using SharpTestsEx;
 using TechTalk.SpecFlow;
+
 
 namespace FluentCodeMetrics.Specs
 {
@@ -33,10 +35,12 @@ namespace FluentCodeMetrics.Specs
         }
 
         [When(@"desejo ignorar referências para tipos de outros assemblies")]
-        public void QuandoDesejoIgnorarReferenciasParaTiposDeOutrosAssemblies()
+        [Given(@"desejo ignorar referências para tipos de outros assemblies")]
+        public void DesejoIgnorarReferenciasParaTiposDeOutrosAssemblies()
         {
             resultingCe = resultingCe.Ignoring(GetType().Assembly.Not());
         }
+
 
         [When(@"esse filtro relaciona (.*)")]
         public void QuandoEsseFiltroRelaciona(string tipo)
@@ -62,5 +66,32 @@ namespace FluentCodeMetrics.Specs
         {
             resultingCe.Value.Should().Be(ce);
         }
+
+        [Given(@"que desejo obter o acoplamento eferente de todos os tipos desse assembly")]
+        public void DadoQueDesejoObterOAcoplamentoEferenteDeTodosOsTiposDesseAssembly()
+        {
+            resultingCe = Ce.For(GetType().Assembly);
+        }
+
+
+        private Type workingType;
+        [Then(@"Verifico o Ce de (.*)")]
+        public void EntaoVerificoOCeDe(string tipo)
+        {
+            workingType = Type.GetType(tipo);
+            workingType.Should().Not.Be.Null();
+        }
+
+        [Then(@"constato que é (.*)")]
+        public void EntaoConstatoQueE(int valor)
+        {
+            var typeCe = ((TypeSetCe) resultingCe).Source
+                .Where(ce => ce.GetType() == typeof(TypeCe))
+                .Cast<TypeCe>()
+                .First(ce => ce.Type == workingType);
+
+            typeCe.Value.Should().Be(valor);
+        }
+
     }
 }
