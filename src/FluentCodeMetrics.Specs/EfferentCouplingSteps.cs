@@ -1,5 +1,6 @@
 ﻿using System;
 using FluentCodeMetrics.Core;
+
 using SharpTestsEx;
 using TechTalk.SpecFlow;
 
@@ -19,14 +20,26 @@ namespace FluentCodeMetrics.Specs
             resultingCe = Ce.For(workingType);
         }
 
+        [When(@"desejo obter seu acoplamento eferente")]
+        public void QuandoDesejoObterSeuAcoplamentoEferente()
+        {
+            //ScenarioContext.Current.Pending();
+        }
+
         
-        [Given(@"tenho um fitro de referências que desejo ignorar")]
-        public void DadoTenhoUmFitroDeReferenciasQueDesejoIgnorar()
+        [When(@"tenho um fitro de referências que desejo ignorar")]
+        public void QuandoTenhoUmFitroDeReferenciasQueDesejoIgnorar()
         {
         }
 
-        [Given(@"esse filtro relaciona (.*)")]
-        public void DadoEsseFiltroRelaciona(string tipo)
+        [When(@"desejo ignorar referências para tipos de outros assemblies")]
+        public void QuandoDesejoIgnorarReferenciasParaTiposDeOutrosAssemblies()
+        {
+            resultingCe = resultingCe.Ignoring(GetType().Assembly.Not());
+        }
+
+        [When(@"esse filtro relaciona (.*)")]
+        public void QuandoEsseFiltroRelaciona(string tipo)
         {
             var type = Type.GetType(tipo);
             type.Should().Not.Be.Null();

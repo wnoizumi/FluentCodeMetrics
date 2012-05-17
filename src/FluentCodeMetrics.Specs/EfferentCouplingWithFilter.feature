@@ -7,6 +7,7 @@ Funcionalidade: Calcular Acoplamento Eferente (Ce) com um Filtro
 
 	Esquema do Cenário: Calcular Acoplamento Eferente para um tipo
 		Dado que tenho um <tipo>
+		Quando desejo obter seu acoplamento eferente
 		E tenho um fitro de referências que desejo ignorar
 		E esse filtro relaciona System.Runtime.TargetedPatchingOptOutAttribute
 		E esse filtro relaciona System.Security.SecuritySafeCriticalAttribute
@@ -17,7 +18,6 @@ Funcionalidade: Calcular Acoplamento Eferente (Ce) com um Filtro
 		E esse filtro relaciona System.String
 		E esse filtro relaciona System.Boolean
 		E esse filtro relaciona System.Type
-		Quando inspeciono seu acoplamento eferente considerando esse filtro
 		Então obtenho <ce>
 
 		Exemplos: 

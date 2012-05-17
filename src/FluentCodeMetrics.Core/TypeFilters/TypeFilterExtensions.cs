@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Reflection;
+using TypeFilter = FluentCodeMetrics.Core.TypeFilters.TypeFilter;
 
-namespace FluentCodeMetrics.Core.TypeFilters
+namespace FluentCodeMetrics.Core
 {
-    public static class TypeExtensions
+    public static class TypeFilterExtensions
     {
         public static TypeFilter Or(this Type left, TypeFilter right)
         {
@@ -17,6 +19,11 @@ namespace FluentCodeMetrics.Core.TypeFilters
         }
 
         public static TypeFilter Not(this Type that)
+        {
+            return TypeFilter.Not(that);
+        }
+
+        public static TypeFilter Not(this Assembly that)
         {
             return TypeFilter.Not(that);
         }

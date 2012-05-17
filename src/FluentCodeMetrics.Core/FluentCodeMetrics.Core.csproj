@@ -63,11 +63,14 @@
     <Compile Include="ReferencesInspector.cs" />
     <Compile Include="TypeFilters\AndTypeFilter.cs" />
     <Compile Include="TypeFilters\EqualsToTypeFilter.cs" />
+    <Compile Include="TypeFilters\FromAssemblyTypeFilter.cs" />
     <Compile Include="TypeFilters\NestedTypesTypeFilter.cs" />
     <Compile Include="TypeFilters\NotTypeFilter.cs" />
     <Compile Include="TypeFilters\OrTypeFilter.cs" />
-    <Compile Include="TypeFilters\TypeExtensions.cs" />
+    <Compile Include="TypeFilters\TypeFilterExtensions.cs" />
     <Compile Include="TypeFilters\TypeFilter.cs" />
+    <Compile Include="TypeSets\TypeSet.cs" />
+    <Compile Include="TypeSets\TypeSetExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

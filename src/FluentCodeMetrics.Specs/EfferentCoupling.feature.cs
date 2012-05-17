@@ -102,7 +102,7 @@ considero também as referências ""herdadas"".", ProgrammingLanguage.CSharp, ((
 #line 21
   testRunner.Given(string.Format("que tenho um {0}", tipo));
 #line 22
-  testRunner.When("inspeciono seu acoplamento eferente");
+  testRunner.When("desejo obter seu acoplamento eferente");
 #line 23
   testRunner.Then(string.Format("obtenho {0}", ce));
 #line hidden

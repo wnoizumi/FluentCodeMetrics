@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 
 namespace FluentCodeMetrics.Core.TypeFilters
 {
@@ -8,22 +9,32 @@ namespace FluentCodeMetrics.Core.TypeFilters
 
         public TypeFilter Or(TypeFilter filter)
         {
-            return TypeFilter.Or(this, filter);
+            return Or(this, filter);
         }
 
         public TypeFilter And(TypeFilter filter)
         {
-            return TypeFilter.And(this, filter);
+            return And(this, filter);
         }
 
         public TypeFilter Not()
         {
-            return TypeFilter.Not(this);
+            return Not(this);
         }
 
         public static implicit operator TypeFilter(Type type)
         {
-            return TypeFilter.EqualsTo(type);
+            return EqualsTo(type);
+        }
+
+        public static implicit operator TypeFilter(Assembly assembly)
+        {
+            return FromAssembly(assembly);
+        }
+
+        public static TypeFilter FromAssembly(Assembly assembly)
+        {
+            return new FromAssemblyTypeFilter(assembly);
         }
 
         public static TypeFilter Not(TypeFilter filter)

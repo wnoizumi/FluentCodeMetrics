@@ -4,6 +4,7 @@ using SharpTestsEx;
 using NUnit.Framework;
 
 using FluentCodeMetrics.Core.TypeFilters;
+using FluentCodeMetrics.Core;
 
 namespace FluentCodeMetrics.Tests
 {

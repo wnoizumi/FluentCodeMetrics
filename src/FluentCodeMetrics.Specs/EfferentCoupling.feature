@@ -19,7 +19,7 @@ Funcionalidade: Calcular Acoplamento Eferente (Ce)
 
 	Esquema do Cenário: Calcular Acoplamento Eferente para um tipo
 		Dado que tenho um <tipo>
-		Quando inspeciono seu acoplamento eferente
+		Quando desejo obter seu acoplamento eferente
 		Então obtenho <ce>
 
 		#

@@ -89,28 +89,28 @@ namespace FluentCodeMetrics.Specs
 #line 9
   testRunner.Given(string.Format("que tenho um {0}", tipo));
 #line 10
-  testRunner.And("tenho um fitro de referências que desejo ignorar");
+  testRunner.When("desejo obter seu acoplamento eferente");
 #line 11
-  testRunner.And("esse filtro relaciona System.Runtime.TargetedPatchingOptOutAttribute");
+  testRunner.And("tenho um fitro de referências que desejo ignorar");
 #line 12
-  testRunner.And("esse filtro relaciona System.Security.SecuritySafeCriticalAttribute");
+  testRunner.And("esse filtro relaciona System.Runtime.TargetedPatchingOptOutAttribute");
 #line 13
+  testRunner.And("esse filtro relaciona System.Security.SecuritySafeCriticalAttribute");
+#line 14
   testRunner.And("esse filtro relaciona System.Runtime.ConstrainedExecution.ReliabilityContractAttr" +
                     "ibute");
-#line 14
-  testRunner.And("esse filtro relaciona System.Runtime.CompilerServices.CompilerGeneratedAttribute");
 #line 15
-  testRunner.And("esse filtro relaciona System.Object");
+  testRunner.And("esse filtro relaciona System.Runtime.CompilerServices.CompilerGeneratedAttribute");
 #line 16
-  testRunner.And("esse filtro relaciona System.Int32");
+  testRunner.And("esse filtro relaciona System.Object");
 #line 17
-  testRunner.And("esse filtro relaciona System.String");
+  testRunner.And("esse filtro relaciona System.Int32");
 #line 18
-  testRunner.And("esse filtro relaciona System.Boolean");
+  testRunner.And("esse filtro relaciona System.String");
 #line 19
-  testRunner.And("esse filtro relaciona System.Type");
+  testRunner.And("esse filtro relaciona System.Boolean");
 #line 20
-  testRunner.When("inspeciono seu acoplamento eferente considerando esse filtro");
+  testRunner.And("esse filtro relaciona System.Type");
 #line 21
   testRunner.Then(string.Format("obtenho {0}", ce));
 #line hidden
