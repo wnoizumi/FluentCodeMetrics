@@ -125,6 +125,17 @@ namespace Samples
         {
             try
             { }
+            catch (DivideByZeroException)
+            { }
+        }
+    }
+
+    public class TryCatchCustomException
+    {
+        public void DoNothing()
+        {
+            try
+            { }
             catch (MyException)
             { }
         }

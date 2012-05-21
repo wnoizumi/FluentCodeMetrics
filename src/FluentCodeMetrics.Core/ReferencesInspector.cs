@@ -102,7 +102,9 @@ namespace FluentCodeMetrics.Core
             var source = from method in typeDef.Methods
                          from exceptionHandler in method.Body.ExceptionHandlers
                          let typeFullName = exceptionHandler.CatchType.FullName
-                         let assemblyFullName = exceptionHandler.CatchType.Module.Assembly.FullName
+                         let assemblyScope = exceptionHandler.CatchType.Scope as AssemblyNameReference
+                         let moduleScope = exceptionHandler.CatchType.Scope as ModuleDefinition
+                         let assemblyFullName = assemblyScope != null ? assemblyScope.FullName : moduleScope.Assembly.FullName
                          let type = Type.GetType(string.Format("{0}, {1}", typeFullName, assemblyFullName))
                          where type != null
                          select type;

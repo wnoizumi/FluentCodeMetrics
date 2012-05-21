@@ -82,6 +82,7 @@ namespace FluentCodeMetrics.Specs
         [NUnit.Framework.TestCaseAttribute("Samples.ClassDependsOnASubClass", "0", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.StaticPropertyAndMethodCall", "2", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.TryCatch", "1", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.TryCatchCustomException", "1", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.TryCatchWithUndefinedType", "0", new string[0])]
         public virtual void CalcularAcoplamentoEferenteParaUmTipo(string tipo, string ce, string[] exampleTags)
         {
@@ -136,21 +137,22 @@ namespace FluentCodeMetrics.Specs
         [NUnit.Framework.TestCaseAttribute("Samples.StaticMember", "0", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.ClassDependsOnASubClass", "0", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.StaticPropertyAndMethodCall", "0", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("Samples.TryCatch", "1", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.TryCatch", "0", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.TryCatchCustomException", "1", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.TryCatchWithUndefinedType", "0", new string[0])]
         public virtual void CalcularAcoplamentoEferenteParaUmTipoConsiderandoApenasTiposDoMesmoAssembly(string tipo, string ce, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calcular Acoplamento Eferente para um tipo, considerando apenas tipos do mesmo as" +
                     "sembly", exampleTags);
-#line 42
- this.ScenarioSetup(scenarioInfo);
 #line 43
-  testRunner.Given(string.Format("que tenho um {0}", tipo));
+ this.ScenarioSetup(scenarioInfo);
 #line 44
-  testRunner.When("desejo obter seu acoplamento eferente");
+  testRunner.Given(string.Format("que tenho um {0}", tipo));
 #line 45
-  testRunner.And("desejo ignorar referências para tipos de outros assemblies");
+  testRunner.When("desejo obter seu acoplamento eferente");
 #line 46
+  testRunner.And("desejo ignorar referências para tipos de outros assemblies");
+#line 47
   testRunner.Then(string.Format("obtenho {0}", ce));
 #line hidden
             this.ScenarioCleanup();
@@ -173,21 +175,22 @@ namespace FluentCodeMetrics.Specs
         [NUnit.Framework.TestCaseAttribute("Samples.StaticMember", "0", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.ClassDependsOnASubClass", "0", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.StaticPropertyAndMethodCall", "0", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("Samples.TryCatch", "1", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.TryCatch", "0", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.TryCatchCustomException", "1", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.TryCatchWithUndefinedType", "0", new string[0])]
         public virtual void CalcularAcoplamentoEferenteParaTodosOsTiposDoAssemblyConsiderandoApenasTiposDoMesmo(string tipo, string ce, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calcular Acoplamento Eferente para todos os tipos do assembly, considerando apena" +
                     "s tipos do mesmo", exampleTags);
-#line 67
- this.ScenarioSetup(scenarioInfo);
-#line 68
-  testRunner.Given("que desejo obter o acoplamento eferente de todos os tipos deste assembly");
 #line 69
-  testRunner.And("desejo ignorar referências para tipos de outros assemblies");
+ this.ScenarioSetup(scenarioInfo);
 #line 70
-  testRunner.Then(string.Format("Verifico o Ce de {0}", tipo));
+  testRunner.Given("que desejo obter o acoplamento eferente de todos os tipos deste assembly");
 #line 71
+  testRunner.And("desejo ignorar referências para tipos de outros assemblies");
+#line 72
+  testRunner.Then(string.Format("Verifico o Ce de {0}", tipo));
+#line 73
   testRunner.And(string.Format("constato que é {0}", ce));
 #line hidden
             this.ScenarioCleanup();

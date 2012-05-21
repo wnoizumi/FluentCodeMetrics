@@ -95,6 +95,7 @@ considero também as referências ""herdadas"".", ProgrammingLanguage.CSharp, ((
         [NUnit.Framework.TestCaseAttribute("Samples.ClassDependsOnASubClass", "8", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.StaticPropertyAndMethodCall", "10", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.TryCatch", "9", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.TryCatchCustomException", "9", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.TryCatchWithUndefinedType", "8", new string[0])]
         public virtual void CalcularAcoplamentoEferenteParaUmTipo(string tipo, string ce, string[] exampleTags)
         {

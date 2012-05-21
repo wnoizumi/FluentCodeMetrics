@@ -169,6 +169,18 @@ namespace FluentCodeMetrics.Tests
                 .Should().Have.SameValuesAs(
                     common.Union(new[]
                     {
+                    typeof(DivideByZeroException)
+                    })
+                 );
+        }
+
+        [Test]
+        public void All_TryCatchCustomException()
+        {
+            ReferencesInspector.For(typeof(TryCatchCustomException)).All()
+                .Should().Have.SameValuesAs(
+                    common.Union(new[]
+                    {
                     typeof(MyException)
                     })
                  );

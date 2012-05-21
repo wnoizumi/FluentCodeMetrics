@@ -37,6 +37,7 @@ Funcionalidade: Calcular Acoplamento Eferente (Ce) com um Filtro
 			| Samples.ClassDependsOnASubClass     | 0  |
 			| Samples.StaticPropertyAndMethodCall | 2  |
 			| Samples.TryCatch                    | 1  |
+			| Samples.TryCatchCustomException     | 1  |
 			| Samples.TryCatchWithUndefinedType   | 0  |
 
 	Esquema do Cenário: Calcular Acoplamento Eferente para um tipo, considerando apenas tipos do mesmo assembly
@@ -61,7 +62,8 @@ Funcionalidade: Calcular Acoplamento Eferente (Ce) com um Filtro
 			| Samples.StaticMember                | 0  |
 			| Samples.ClassDependsOnASubClass     | 0  |
 			| Samples.StaticPropertyAndMethodCall | 0  |
-			| Samples.TryCatch                    | 1  |
+			| Samples.TryCatch                    | 0  |
+			| Samples.TryCatchCustomException     | 1  |
 			| Samples.TryCatchWithUndefinedType   | 0  |
 
 	Esquema do Cenário: Calcular Acoplamento Eferente para todos os tipos do assembly, considerando apenas tipos do mesmo
@@ -86,7 +88,8 @@ Funcionalidade: Calcular Acoplamento Eferente (Ce) com um Filtro
 			| Samples.StaticMember                | 0  |
 			| Samples.ClassDependsOnASubClass     | 0  |
 			| Samples.StaticPropertyAndMethodCall | 0  |
-			| Samples.TryCatch                    | 1  |
+			| Samples.TryCatch                    | 0  |
+			| Samples.TryCatchCustomException     | 1  |
 			| Samples.TryCatchWithUndefinedType   | 0  |
 
 
