@@ -157,8 +157,8 @@ namespace FluentCodeMetrics.Specs
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Calcular Acoplamento Eferente para um todos os tipos do assembly, considerando ap" +
-            "enas tipos do mesmo")]
+        [NUnit.Framework.DescriptionAttribute("Calcular Acoplamento Eferente para todos os tipos do assembly, considerando apena" +
+            "s tipos do mesmo")]
         [NUnit.Framework.TestCaseAttribute("Samples.EmptyClass", "0", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.SingleArgCtor", "1", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.SingleArgVoidMethod", "1", new string[0])]
@@ -173,14 +173,16 @@ namespace FluentCodeMetrics.Specs
         [NUnit.Framework.TestCaseAttribute("Samples.StaticMember", "0", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.ClassDependsOnASubClass", "0", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.StaticPropertyAndMethodCall", "0", new string[0])]
-        public virtual void CalcularAcoplamentoEferenteParaUmTodosOsTiposDoAssemblyConsiderandoApenasTiposDoMesmo(string tipo, string ce, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("Samples.TryCatch", "1", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.TryCatchWithUndefinedType", "0", new string[0])]
+        public virtual void CalcularAcoplamentoEferenteParaTodosOsTiposDoAssemblyConsiderandoApenasTiposDoMesmo(string tipo, string ce, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calcular Acoplamento Eferente para um todos os tipos do assembly, considerando ap" +
-                    "enas tipos do mesmo", exampleTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calcular Acoplamento Eferente para todos os tipos do assembly, considerando apena" +
+                    "s tipos do mesmo", exampleTags);
 #line 67
  this.ScenarioSetup(scenarioInfo);
 #line 68
-  testRunner.Given("que desejo obter o acoplamento eferente de todos os tipos desse assembly");
+  testRunner.Given("que desejo obter o acoplamento eferente de todos os tipos deste assembly");
 #line 69
   testRunner.And("desejo ignorar referências para tipos de outros assemblies");
 #line 70
