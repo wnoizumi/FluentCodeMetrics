@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 
 // ReSharper disable CheckNamespace
 namespace Samples
@@ -118,5 +117,32 @@ namespace Samples
         {
             Console.WriteLine(DateTime.Now);
         }
+    }
+
+    public class TryCatch
+    {
+        public void DoNothing()
+        {
+            try
+            { }
+            catch (MyException)
+            { }
+        }
+    }
+
+    public class TryCatchWithUndefinedType
+    {
+        public void DoNothing()
+        {
+            try
+            { }
+            catch
+            { }
+        }
+    }
+
+    public class MyException : Exception
+    { 
+    
     }
 }

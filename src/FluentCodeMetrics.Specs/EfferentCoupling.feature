@@ -52,6 +52,8 @@ Funcionalidade: Calcular Acoplamento Eferente (Ce)
 			| Samples.StaticMember                | 10 |
 			| Samples.ClassDependsOnASubClass     | 8  |
 			| Samples.StaticPropertyAndMethodCall | 10 |
+			| Samples.TryCatch                    | 9  |
+			| Samples.TryCatchWithUndefinedType   | 8  |
 
 
 

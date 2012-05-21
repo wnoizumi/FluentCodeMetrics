@@ -161,6 +161,27 @@ namespace FluentCodeMetrics.Tests
                         }
                 );
         }
+
+        [Test]
+        public void All_TryCatch()
+        {
+            ReferencesInspector.For(typeof(TryCatch)).All()
+                .Should().Have.SameValuesAs(
+                    common.Union(new[]
+                    {
+                    typeof(MyException)
+                    })
+                 );
+        }
+
+        [Test]
+        public void All_TryCatchWithUndefinedType()
+        {
+            ReferencesInspector.For(typeof(TryCatchWithUndefinedType)).All()
+                .Should().Have.SameValuesAs(
+                    common
+                 );
+        }
     }
     // ReSharper restore InconsistentNaming
 }
