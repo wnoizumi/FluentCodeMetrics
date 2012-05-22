@@ -89,6 +89,29 @@ namespace FluentCodeMetrics.Core
             return new ReferencedTypesTypeSet(other.Union(source), workingType);
         }
 
+        public ReferencedTypesTypeSet
+            FromExceptionHandlers()
+        {
+            var assembly = AssemblyCache.Load(workingType.Assembly.GetName().Name);
+            var typeDef = assembly.MainModule.Types
+                .FirstOrDefault(type => type.FullName == workingType.FullName);
+
+            if (typeDef == null)
+                return new ReferencedTypesTypeSet(other, workingType);
+
+            var source = from method in typeDef.Methods
+                         from exceptionHandler in method.Body.ExceptionHandlers
+                         let typeFullName = exceptionHandler.CatchType.FullName
+                         let assemblyScope = exceptionHandler.CatchType.Scope as AssemblyNameReference
+                         let moduleScope = exceptionHandler.CatchType.Scope as ModuleDefinition
+                         let assemblyFullName = assemblyScope != null ? assemblyScope.FullName : moduleScope.Assembly.FullName
+                         let type = Type.GetType(string.Format("{0}, {1}", typeFullName, assemblyFullName))
+                         where type != null
+                         select type;
+
+            return new ReferencedTypesTypeSet(other.Union(source), workingType);
+        }
+
         public ReferencedTypesTypeSet 
             FromCtorParameters()
         {
@@ -197,6 +220,7 @@ namespace FluentCodeMetrics.Core
                 .And.FromMethodsParameters()
                 .And.FromCtorParameters()
                 .And.FromStaticMethodCalls()
+                .And.FromExceptionHandlers()
                 .Distinct()
                 ,
                 workingType

@@ -36,6 +36,9 @@ Funcionalidade: Calcular Acoplamento Eferente (Ce) com um Filtro
 			| Samples.StaticMember                | 1  |
 			| Samples.ClassDependsOnASubClass     | 0  |
 			| Samples.StaticPropertyAndMethodCall | 2  |
+			| Samples.TryCatch                    | 1  |
+			| Samples.TryCatchCustomException     | 1  |
+			| Samples.TryCatchWithUndefinedType   | 0  |
 
 	Esquema do Cenário: Calcular Acoplamento Eferente para um tipo, considerando apenas tipos do mesmo assembly
 		Dado que tenho um <tipo>
@@ -59,9 +62,12 @@ Funcionalidade: Calcular Acoplamento Eferente (Ce) com um Filtro
 			| Samples.StaticMember                | 0  |
 			| Samples.ClassDependsOnASubClass     | 0  |
 			| Samples.StaticPropertyAndMethodCall | 0  |
+			| Samples.TryCatch                    | 0  |
+			| Samples.TryCatchCustomException     | 1  |
+			| Samples.TryCatchWithUndefinedType   | 0  |
 
-	Esquema do Cenário: Calcular Acoplamento Eferente para um todos os tipos do assembly, considerando apenas tipos do mesmo
-		Dado que desejo obter o acoplamento eferente de todos os tipos desse assembly
+	Esquema do Cenário: Calcular Acoplamento Eferente para todos os tipos do assembly, considerando apenas tipos do mesmo
+		Dado que desejo obter o acoplamento eferente de todos os tipos deste assembly
 		E desejo ignorar referências para tipos de outros assemblies
 		Então Verifico o Ce de <tipo> 
 		E constato que é <ce>
@@ -82,6 +88,9 @@ Funcionalidade: Calcular Acoplamento Eferente (Ce) com um Filtro
 			| Samples.StaticMember                | 0  |
 			| Samples.ClassDependsOnASubClass     | 0  |
 			| Samples.StaticPropertyAndMethodCall | 0  |
+			| Samples.TryCatch                    | 0  |
+			| Samples.TryCatchCustomException     | 1  |
+			| Samples.TryCatchWithUndefinedType   | 0  |
 
 
 

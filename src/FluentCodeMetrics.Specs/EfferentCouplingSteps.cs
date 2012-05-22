@@ -67,7 +67,7 @@ namespace FluentCodeMetrics.Specs
             resultingCe.Value.Should().Be(ce);
         }
 
-        [Given(@"que desejo obter o acoplamento eferente de todos os tipos desse assembly")]
+        [Given(@"que desejo obter o acoplamento eferente de todos os tipos deste assembly")]
         public void DadoQueDesejoObterOAcoplamentoEferenteDeTodosOsTiposDesseAssembly()
         {
             resultingCe = Ce.For(GetType().Assembly);
