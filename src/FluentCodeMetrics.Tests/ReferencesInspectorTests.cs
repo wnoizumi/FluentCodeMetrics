@@ -194,6 +194,21 @@ namespace FluentCodeMetrics.Tests
                     common
                  );
         }
+
+        [Test]
+        public void All_VoidMethodUsingFee()
+        {
+            ReferencesInspector.For(typeof(Samples.VoidMethodUsingFee)).All()
+                .Should().Contain(typeof(Samples.Fee));
+        }
+
+
+        [Test]
+        public void FromNewobjInstructions_VoidMethodUsingFee()
+        {
+            ReferencesInspector.For(typeof(Samples.VoidMethodUsingFee)).FromNewobjInstructions()
+                .Should().Contain(typeof(Samples.Fee));
+        }
     }
     // ReSharper restore InconsistentNaming
 }

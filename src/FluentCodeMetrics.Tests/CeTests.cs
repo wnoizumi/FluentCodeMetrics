@@ -63,5 +63,14 @@ namespace FluentCodeMetrics.Tests
                 new[] { typeof(Samples.Fee) }
                 );
         }
+
+        [Test]
+        public void All_VoidMethodUsingFee()
+        {
+            ReferencesInspector.For(typeof (Samples.VoidMethodUsingFee)).All()
+                .Should().Contain(typeof (Samples.Fee));
+        }
+
+        
     }
 }

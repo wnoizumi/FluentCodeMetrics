@@ -152,6 +152,14 @@ namespace Samples
         }
     }
 
+    public class VoidMethodUsingFee
+    {
+        public void Foo()
+        {
+            var f = new Fee();
+        }
+    }
+
     public class MyException : Exception
     { 
     
