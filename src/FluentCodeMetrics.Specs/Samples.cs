@@ -198,5 +198,26 @@ namespace Samples
                 i++;
             }
         }
+
+        public string GetGenreGreeting(Genre genre)
+        {
+            string result = null;
+            switch (genre)
+            {
+                case Genre.Male:
+                    result = "Hello, Sir";
+                    break;
+                case Genre.Female:
+                    result = "Hello, Lady";
+                    break;
+            }
+            return result;
+        }
+    }
+
+    public enum Genre
+    {
+        Male,
+        Female
     }
 }

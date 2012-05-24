@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Reflection;
 
 using FluentCodeMetrics.Core.Cecil;
@@ -45,11 +42,28 @@ namespace FluentCodeMetrics.Core
             var methodDef = typeDef.Methods
                 .First(m => m.Name == method.Name);
 
-            var ccInstructions = from instruction in methodDef.Body.Instructions
-                                 where ccBranchOpCodes.Contains(instruction.OpCode)
-                                 select instruction;
+            var ccBranchInstructions =
+                from instruction in methodDef.Body.Instructions
+                where ccBranchOpCodes.Contains(instruction.OpCode)
+                select instruction;
 
-            return new Cc(ccInstructions.Count() + 1);
+            var ccSwitchInstructions =
+                from instruction in methodDef.Body.Instructions
+                where instruction.OpCode == OpCodes.Switch
+                from operand in (Instruction []) instruction.Operand
+                select operand;
+
+            var ccRetInstructions =
+                from instruction in methodDef.Body.Instructions
+                where instruction.OpCode == OpCodes.Ret
+                select instruction;
+
+
+            return new Cc(
+                ccBranchInstructions.Count() +
+                ccSwitchInstructions.Count() +
+                ccRetInstructions.Count()
+            );
         }
     }
 }

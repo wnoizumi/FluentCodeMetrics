@@ -19,6 +19,7 @@ Funcionalidade: Calcular Complexidade Ciclomática (Cc)
 			| Samples.MyClass | GetGreetingMessage           | 2  |
 			| Samples.MyClass | PrintHelloTenTimesUsingFor   | 2  |
 			| Samples.MyClass | PrintHelloTenTimesUsingWhile | 2  |
+			| Samples.MyClass | GetGenreGreeting             | 3  |
 			
 
 
