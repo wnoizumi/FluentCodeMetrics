@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Cc.cs" />
     <Compile Include="Ce.cs" />
+    <Compile Include="Cecil\CecilExtensions.cs" />
     <Compile Include="CeExtensions.cs" />
     <Compile Include="Cecil\AssemblyCache.cs" />
     <Compile Include="CodeMetric.cs" />

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Mono.Cecil;
+using System;
 
 namespace FluentCodeMetrics.Core.Cecil
 {

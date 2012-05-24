@@ -68,29 +68,20 @@ namespace FluentCodeMetrics.Core
         ReferencedTypesTypeSet
             FromMethodReferences(OpCode opCode)
         {
-            var assembly = AssemblyCache.Load(workingType.Assembly.GetName().Name);
-            var typeDef = assembly.MainModule.Types
-                .FirstOrDefault(type => type.FullName == workingType.FullName);
+            var typeDef = workingType.ToDefiniton();
 
             if (typeDef == null)
                 return new ReferencedTypesTypeSet(other, workingType);
-
 
             var source =
                 from method in typeDef.Methods
                 from instruction in method.Body.Instructions
                 where instruction.OpCode == opCode
                 let operand = instruction.Operand as MethodReference
-                let declaringType = operand.DeclaringType.Resolve()
 #if DEBUG
-                where !declaringType.FullName.StartsWith("nCrunch")
+                where !operand.DeclaringType.Resolve().FullName.StartsWith("nCrunch")
 #endif
-                let typeFullName = string.Format(
-                    "{0}, {1}",
-                    declaringType.FullName,
-                    declaringType.Module.Assembly.Name
-                    )
-                let type = Type.GetType(typeFullName)
+                let type = operand.DeclaringType.ToType()
                 select type;
 
             return new ReferencedTypesTypeSet(other.Union(source), workingType);
@@ -99,9 +90,7 @@ namespace FluentCodeMetrics.Core
         public ReferencedTypesTypeSet
             FromExceptionHandlers()
         {
-            var assembly = AssemblyCache.Load(workingType.Assembly.GetName().Name);
-            var typeDef = assembly.MainModule.Types
-                .FirstOrDefault(type => type.FullName == workingType.FullName);
+            var typeDef = workingType.ToDefiniton();
 
             if (typeDef == null)
                 return new ReferencedTypesTypeSet(other, workingType);
@@ -109,11 +98,7 @@ namespace FluentCodeMetrics.Core
             var source = from method in typeDef.Methods
                          from exceptionHandler in method.Body.ExceptionHandlers
                          where exceptionHandler.CatchType != null
-                         let typeFullName = exceptionHandler.CatchType.FullName
-                         let assemblyScope = exceptionHandler.CatchType.Scope as AssemblyNameReference
-                         let moduleScope = exceptionHandler.CatchType.Scope as ModuleDefinition
-                         let assemblyFullName = assemblyScope != null ? assemblyScope.FullName : moduleScope.Assembly.FullName
-                         let type = Type.GetType(string.Format("{0}, {1}", typeFullName, assemblyFullName))
+                         let type = exceptionHandler.CatchType.ToType()
                          where type != null
                          select type;
 
