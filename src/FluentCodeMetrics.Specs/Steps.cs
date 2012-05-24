@@ -77,9 +77,9 @@ namespace FluentCodeMetrics.Specs
         }
 
         [Then(@"obtenho (.*)")]
-        public void EntaoObtenho(int ce)
+        public void EntaoObtenho(int value)
         {
-            resultingMetric.Value.Should().Be(ce);
+            resultingMetric.Value.Should().Be(value);
         }
 
         [Given(@"que desejo obter o acoplamento eferente de todos os tipos deste assembly")]

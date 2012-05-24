@@ -14,9 +14,11 @@ Funcionalidade: Calcular Complexidade Ciclomática (Cc)
 
 		
 		Exemplos: 
-			| tipo            | método          | cc |
-			| Samples.MyClass | EmptyVoidMethod | 1  |
-
+			| tipo            | método                       | cc |
+			| Samples.MyClass | EmptyVoidMethod              | 1  |
+			| Samples.MyClass | GetGreetingMessage           | 2  |
+			| Samples.MyClass | PrintHelloTenTimesUsingFor   | 2  |
+			| Samples.MyClass | PrintHelloTenTimesUsingWhile | 2  |
 			
 
 

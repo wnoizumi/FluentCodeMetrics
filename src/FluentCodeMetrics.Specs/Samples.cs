@@ -173,5 +173,30 @@ namespace Samples
         {
             
         }
+
+        public string GetGreetingMessage()
+        {
+            return DateTime.Now.Hour < 12 
+                ? "Bom dia!" 
+                : "Boa tarde!";
+        }
+
+        public void PrintHelloTenTimesUsingFor()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine("Hello");
+            }
+        }
+
+        public void PrintHelloTenTimesUsingWhile()
+        {
+            int i = 0;
+            while (i < 10)
+            {
+                Console.WriteLine("Hello");
+                i++;
+            }
+        }
     }
 }
