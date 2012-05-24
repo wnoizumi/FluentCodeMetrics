@@ -52,6 +52,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CyclomaticComplexity.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CyclomaticComplexity.feature</DependentUpon>
+    </Compile>
     <Compile Include="EfferentCouplingWithFilter.feature.cs">
       <DependentUpon>EfferentCouplingWithFilter.feature</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -62,12 +67,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EfferentCoupling.feature</DependentUpon>
     </Compile>
-    <Compile Include="EfferentCouplingSteps.cs" />
+    <Compile Include="Steps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Samples.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="CyclomaticComplexity.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CyclomaticComplexity.feature.cs</LastGenOutput>
+    </None>
     <None Include="EfferentCouplingWithFilter.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>EfferentCouplingWithFilter.feature.cs</LastGenOutput>

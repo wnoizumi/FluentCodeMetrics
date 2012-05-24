@@ -4,28 +4,43 @@ using FluentCodeMetrics.Core;
 
 using SharpTestsEx;
 using TechTalk.SpecFlow;
+using System.Reflection;
 
 
 namespace FluentCodeMetrics.Specs
 {
     [Binding]
-    public class EfferentCouplingSteps
+    public class Steps
     {
-        private Ce resultingCe;
+        private CodeMetric resultingMetric;
+        private Type workingType;
         
         [Given(@"que tenho um (.*)")]
         public void DadoQueTenhoUm(string tipo)
         {
-            var workingType = Type.GetType(tipo);
+            workingType = Type.GetType(tipo);
             workingType.Should().Not.Be.Null();
 
-            resultingCe = Ce.For(workingType);
+
+        }
+
+        private MethodInfo workingMethod;
+        [Given(@"nesse tipo há um método chamado (.*)")]
+        public void DadoNesseTipoHaUmMetodoChamado(string nomeDoMetodo)
+        {
+            workingMethod = workingType.GetMethod(nomeDoMetodo);
+        }
+
+        [When(@"desejo obter sua Complexidade Ciclomática \(Cc\)")]
+        public void QuandoDesejoObterSuaComplexidadeCiclomaticaCc()
+        {
+            resultingMetric = Cc.For(workingMethod);
         }
 
         [When(@"desejo obter seu acoplamento eferente")]
         public void QuandoDesejoObterSeuAcoplamentoEferente()
         {
-            //ScenarioContext.Current.Pending();
+            resultingMetric = Ce.For(workingType);
         }
 
         
@@ -38,7 +53,7 @@ namespace FluentCodeMetrics.Specs
         [Given(@"desejo ignorar referências para tipos de outros assemblies")]
         public void DesejoIgnorarReferenciasParaTiposDeOutrosAssemblies()
         {
-            resultingCe = resultingCe.Ignoring(GetType().Assembly.Not());
+            resultingMetric = ((Ce)resultingMetric).Ignoring(GetType().Assembly.Not());
         }
 
 
@@ -48,7 +63,7 @@ namespace FluentCodeMetrics.Specs
             var type = Type.GetType(tipo);
             type.Should().Not.Be.Null();
 
-            resultingCe = resultingCe.Ignoring(type);
+            resultingMetric = ((Ce)resultingMetric).Ignoring(type);
         }
 
         [When(@"inspeciono seu acoplamento eferente considerando esse filtro")]
@@ -64,17 +79,15 @@ namespace FluentCodeMetrics.Specs
         [Then(@"obtenho (.*)")]
         public void EntaoObtenho(int ce)
         {
-            resultingCe.Value.Should().Be(ce);
+            resultingMetric.Value.Should().Be(ce);
         }
 
         [Given(@"que desejo obter o acoplamento eferente de todos os tipos deste assembly")]
         public void DadoQueDesejoObterOAcoplamentoEferenteDeTodosOsTiposDesseAssembly()
         {
-            resultingCe = Ce.For(GetType().Assembly);
+            resultingMetric = Ce.For(GetType().Assembly);
         }
 
-
-        private Type workingType;
         [Then(@"Verifico o Ce de (.*)")]
         public void EntaoVerificoOCeDe(string tipo)
         {
@@ -85,7 +98,7 @@ namespace FluentCodeMetrics.Specs
         [Then(@"constato que é (.*)")]
         public void EntaoConstatoQueE(int valor)
         {
-            var typeCe = ((TypeSetCe) resultingCe).Source
+            var typeCe = ((TypeSetCe) resultingMetric).Source
                 .Where(ce => ce.GetType() == typeof(TypeCe))
                 .Cast<TypeCe>()
                 .First(ce => ce.Type == workingType);

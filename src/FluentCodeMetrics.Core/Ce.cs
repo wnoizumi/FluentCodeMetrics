@@ -7,9 +7,9 @@ using System.Collections.Generic;
 
 namespace FluentCodeMetrics.Core
 {
-    public abstract class Ce
+    public abstract class Ce : CodeMetric
     {
-        public int Value
+        public override int Value
         {
             get { return References.Count(); }
         }

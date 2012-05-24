@@ -164,4 +164,14 @@ namespace Samples
     { 
     
     }
+
+    // ---------------------------------------------
+
+    public class MyClass
+    {
+        public void EmptyVoidMethod()
+        {
+            
+        }
+    }
 }
