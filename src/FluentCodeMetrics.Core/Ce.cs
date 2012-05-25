@@ -85,27 +85,27 @@ namespace FluentCodeMetrics.Core
 
     public class TypeSetCe : Ce
     {
-        private IEnumerable<Ce> source;
+        private readonly IEnumerable<Ce> source;
+        private readonly ReferencedTypesTypeSet references;
 
         public IEnumerable<Ce> Source
         {
             get { return source; }
         }
 
+        public override ReferencedTypesTypeSet References
+        {
+            get { return this.references; }
+        }
+
         internal TypeSetCe(IEnumerable<Ce> source)
         {
             this.source = source;
-        }
-        
-        public override ReferencedTypesTypeSet References
-        {
-            get
-            {
-                var allReferences = from member in source
-                                    from reference in member.References
-                                    select reference;
-                return new ReferencedTypesTypeSet(allReferences.Distinct(), null);
-            }
+
+            var allReferences = from member in source
+                                from reference in member.References
+                                select reference;
+            this.references = new ReferencedTypesTypeSet(allReferences.Distinct(), null);
         }
 
         public override Ce FilterBy(TypeConstraint filter)
