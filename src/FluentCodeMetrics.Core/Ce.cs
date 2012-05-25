@@ -16,11 +16,6 @@ namespace FluentCodeMetrics.Core
 
         public abstract ReferencedTypesTypeSet References { get; }
 
-        public static implicit operator int(Ce source)
-        {
-            return source.Value;
-        }
-
         public abstract Ce FilterBy(TypeConstraint filter);
 
         public Ce Ignoring(TypeConstraint toIgnore)
@@ -55,7 +50,7 @@ namespace FluentCodeMetrics.Core
     }
 
    
-    public class TypeCe : Ce
+    public sealed class TypeCe : Ce
     {
         private readonly ReferencedTypesTypeSet references;
         private readonly Type type;
@@ -83,7 +78,8 @@ namespace FluentCodeMetrics.Core
         }
     }
 
-    public class TypeSetCe : Ce
+    // TODO: Improve code coverage to References property.
+    public sealed class TypeSetCe : Ce
     {
         private readonly IEnumerable<Ce> source;
         private readonly ReferencedTypesTypeSet references;

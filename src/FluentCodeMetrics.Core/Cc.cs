@@ -6,7 +6,7 @@ using Mono.Cecil.Cil;
 
 namespace FluentCodeMetrics.Core
 {
-    public class Cc : CodeMetric
+    public sealed class Cc : CodeMetric
     {
         private Cc(int value)
         {
