@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace FluentCodeMetrics.Core.TypeFilters
+namespace FluentCodeMetrics.Core.TypeConstraints
 {
-    public class EqualsToTypeFilter : TypeFilter
+    public class EqualsToTypeConstraint : TypeConstraint
     {
         private readonly Type typeField;
 
-        internal EqualsToTypeFilter(Type type)
+        internal EqualsToTypeConstraint(Type type)
         {
             typeField = type;
         }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using FluentCodeMetrics.Core.TypeFilters;
+using FluentCodeMetrics.Core.TypeConstraints;
 using NUnit.Framework;
 using SharpTestsEx;
 using FluentCodeMetrics.Core;

@@ -7,7 +7,7 @@ using FluentCodeMetrics.Core.Cecil;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 
-using TypeFilter = FluentCodeMetrics.Core.TypeFilters.TypeFilter;
+using TypeFilter = FluentCodeMetrics.Core.TypeConstraints.TypeConstraint;
 using FluentCodeMetrics.Core.TypeSets;
 
 namespace FluentCodeMetrics.Core

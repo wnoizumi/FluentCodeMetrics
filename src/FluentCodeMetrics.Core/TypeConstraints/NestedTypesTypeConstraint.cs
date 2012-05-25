@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace FluentCodeMetrics.Core.TypeFilters
+namespace FluentCodeMetrics.Core.TypeConstraints
 {
-    public class NestedTypesTypeFilter : TypeFilter
+    public class NestedTypesTypeConstraint : TypeConstraint
     {
         private readonly Type declaringType;
 
-        internal NestedTypesTypeFilter(Type declaringType)
+        internal NestedTypesTypeConstraint(Type declaringType)
         {
             this.declaringType = declaringType;
         }

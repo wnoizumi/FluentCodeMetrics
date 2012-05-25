@@ -3,20 +3,20 @@ using Samples;
 using SharpTestsEx;
 using NUnit.Framework;
 
-using FluentCodeMetrics.Core.TypeFilters;
+using FluentCodeMetrics.Core.TypeConstraints;
 using FluentCodeMetrics.Core;
 
 namespace FluentCodeMetrics.Tests
 {
     [TestFixture]
-    public class TypeFilterTests
+    public class TypeConstraintTests
     {
         [Test]
         [TestCase(typeof(int), true)]
         [TestCase(typeof(string), false)]
         public void EqualsToInt32(Type type, bool expected)
         {
-            TypeFilter
+            TypeConstraint
                 .EqualsTo(typeof (int))
                 .Check(type)
                 .Should().Be(expected);

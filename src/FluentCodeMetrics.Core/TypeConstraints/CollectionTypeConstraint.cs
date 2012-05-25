@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace FluentCodeMetrics.Core.TypeFilters
+namespace FluentCodeMetrics.Core.TypeConstraints
 {
-    public class CollectionTypeFilter : TypeFilter
+    public class CollectionTypeConstraint : TypeConstraint
     {
         private readonly IEnumerable<Type> typesField;
 
-        internal CollectionTypeFilter(IEnumerable<Type> types)
+        internal CollectionTypeConstraint(IEnumerable<Type> types)
         {
             typesField = types;
         }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using FluentCodeMetrics.Core.TypeFilters;
+using FluentCodeMetrics.Core.TypeConstraints;
 
 namespace FluentCodeMetrics.Core.TypeSets
 {
@@ -33,7 +33,7 @@ namespace FluentCodeMetrics.Core.TypeSets
             }
         }
 
-        public ReferencedTypesTypeSet FilterBy(TypeFilter filter)
+        public ReferencedTypesTypeSet FilterBy(TypeConstraint filter)
         {
             return new ReferencedTypesTypeSet(
                 sourceField.Where(filter.Check),

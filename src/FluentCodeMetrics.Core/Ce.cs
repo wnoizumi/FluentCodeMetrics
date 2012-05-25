@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-using FluentCodeMetrics.Core.TypeFilters;
+using FluentCodeMetrics.Core.TypeConstraints;
 using FluentCodeMetrics.Core.TypeSets;
 using System.Collections.Generic;
 
@@ -21,9 +21,9 @@ namespace FluentCodeMetrics.Core
             return source.Value;
         }
 
-        public abstract Ce FilterBy(TypeFilter filter);
+        public abstract Ce FilterBy(TypeConstraint filter);
 
-        public Ce Ignoring(TypeFilter toIgnore)
+        public Ce Ignoring(TypeConstraint toIgnore)
         {
             return FilterBy(toIgnore.Not());
         }
@@ -75,7 +75,7 @@ namespace FluentCodeMetrics.Core
             get { return references; }
         }
 
-        public override Ce FilterBy(TypeFilter filter)
+        public override Ce FilterBy(TypeConstraint filter)
         {
             return filter == null ?
                 this :
@@ -108,7 +108,7 @@ namespace FluentCodeMetrics.Core
             }
         }
 
-        public override Ce FilterBy(TypeFilter filter)
+        public override Ce FilterBy(TypeConstraint filter)
         {
             var newSource = source.Select(ceResult => ceResult.FilterBy(filter)).ToList();
             return new TypeSetCe(newSource);
