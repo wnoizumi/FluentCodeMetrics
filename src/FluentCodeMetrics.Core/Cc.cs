@@ -42,27 +42,17 @@ namespace FluentCodeMetrics.Core
             var methodDef = typeDef.Methods
                 .First(m => m.Name == method.Name);
 
-            var ccBranchInstructions =
+            var ccInstructions =
                 from instruction in methodDef.Body.Instructions
-                where ccBranchOpCodes.Contains(instruction.OpCode)
+                where (
+                    ccBranchOpCodes.Contains(instruction.OpCode) ||
+                    instruction.OpCode == OpCodes.Switch ||
+                    instruction.OpCode == OpCodes.Ret
+                )
                 select instruction;
-
-            var ccSwitchInstructions =
-                from instruction in methodDef.Body.Instructions
-                where instruction.OpCode == OpCodes.Switch
-                from operand in (Instruction []) instruction.Operand
-                select operand;
-
-            var ccRetInstructions =
-                from instruction in methodDef.Body.Instructions
-                where instruction.OpCode == OpCodes.Ret
-                select instruction;
-
 
             return new Cc(
-                ccBranchInstructions.Count() +
-                ccSwitchInstructions.Count() +
-                ccRetInstructions.Count()
+                ccInstructions.Sum(instruction => instruction.OpCode == OpCodes.Switch ? ((Instruction[]) instruction.Operand).Length : 1)
             );
         }
     }
