@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+
+using System.Linq;
 using System.Reflection;
 
-using FluentCodeMetrics.Core.Cecil;
 using Mono.Cecil.Cil;
+using FluentCodeMetrics.Core.Cecil;
 
 namespace FluentCodeMetrics.Core
 {
@@ -42,9 +44,14 @@ namespace FluentCodeMetrics.Core
                 )
                 select instruction;
 
-            return new Cc(
-                ccInstructions.Sum(instruction => instruction.OpCode == OpCodes.Switch ? ((Instruction[]) instruction.Operand).Length : 1)
-            );
+            Func<Instruction, int> criteria = instruction => 
+                instruction.OpCode == OpCodes.Switch
+                ? ((Instruction[]) instruction.Operand).Length
+                : 1;
+            
+            var value = ccInstructions.Sum(criteria);
+
+            return new Cc(value);
         }
     }
 }
