@@ -34,10 +34,7 @@ namespace FluentCodeMetrics.Core
         public static Cc For(MethodInfo method)
         {
             var type = method.DeclaringType;
-            var assembly = AssemblyCache.Load(type.Assembly.GetName().Name);
-
-            var typeDef = assembly.MainModule.Types
-                .First(t => t.FullName == type.FullName);
+            var typeDef = type.ToDefiniton();
 
             var methodDef = typeDef.Methods
                 .First(m => m.Name == method.Name);
