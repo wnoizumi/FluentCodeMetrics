@@ -33,14 +33,8 @@ namespace FluentCodeMetrics.Core
         // TODO: Support to overloaded methods
         public static Cc For(MethodInfo method)
         {
-            var type = method.DeclaringType;
-            var typeDef = type.ToDefiniton();
-
-            var methodDef = typeDef.Methods
-                .First(m => m.Name == method.Name);
-
             var ccInstructions =
-                from instruction in methodDef.Body.Instructions
+                from instruction in method.ToDefinition().Body.Instructions
                 where (
                     ccBranchOpCodes.Contains(instruction.OpCode) ||
                     instruction.OpCode == OpCodes.Switch ||

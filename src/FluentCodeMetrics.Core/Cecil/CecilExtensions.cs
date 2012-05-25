@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Mono.Cecil;
+using System.Reflection;
 
 namespace FluentCodeMetrics.Core.Cecil
 {
@@ -18,6 +19,12 @@ namespace FluentCodeMetrics.Core.Cecil
         {
             var assembly = AssemblyCache.Load(type.Assembly.GetName().Name);
             return assembly.MainModule.Types.FirstOrDefault(t => t.FullName == type.FullName);
+        }
+
+        public static MethodDefinition ToDefinition(this MethodInfo method)
+        {
+            return method.DeclaringType.ToDefiniton().Methods
+                .First(m => m.Name == method.Name);
         }
     }
 }
