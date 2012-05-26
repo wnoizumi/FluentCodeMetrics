@@ -73,6 +73,7 @@ namespace FluentCodeMetrics.Specs
         [NUnit.Framework.TestCaseAttribute("Samples.MyClass", "PrintHelloTenTimesUsingFor", "2", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.MyClass", "PrintHelloTenTimesUsingWhile", "2", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.MyClass", "GetGenreGreeting", "3", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.MyClass", "TryCatchMethod", "3", new string[0])]
         public virtual void CalcularComplexidadeCiclomaticaParaUmMetodo(string tipo, string metodo, string cc, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calcular Complexidade Ciclomática para um método", exampleTags);

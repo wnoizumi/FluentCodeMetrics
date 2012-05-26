@@ -213,6 +213,27 @@ namespace Samples
             }
             return result;
         }
+
+        public void TryCatchMethod()
+        {
+            try
+            {
+                PrintHelloTenTimesUsingFor();
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine("--> "+ e.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                Console.WriteLine("done!");
+            }
+        }
+
     }
 
     public enum Genre

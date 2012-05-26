@@ -35,8 +35,11 @@ namespace FluentCodeMetrics.Core
         // TODO: Support to overloaded methods
         public static Cc For(MethodInfo method)
         {
+            var methodBody = method.ToDefinition().Body;
+            var methodInstructions = methodBody.Instructions;
+
             var ccInstructions =
-                from instruction in method.ToDefinition().Body.Instructions
+                from instruction in methodInstructions
                 where (
                     ccBranchOpCodes.Contains(instruction.OpCode) ||
                     instruction.OpCode == OpCodes.Switch ||
@@ -44,12 +47,14 @@ namespace FluentCodeMetrics.Core
                 )
                 select instruction;
 
-            Func<Instruction, int> criteria = instruction => 
+            Func<Instruction, int> ccWeight = instruction => 
                 instruction.OpCode == OpCodes.Switch
                 ? ((Instruction[]) instruction.Operand).Length
                 : 1;
-            
-            var value = ccInstructions.Sum(criteria);
+
+            var ccCatchs = methodBody.ExceptionHandlers.Count(c => c.CatchType != null);
+
+            var value = ccInstructions.Sum(ccWeight) + ccCatchs;
 
             return new Cc(value);
         }
