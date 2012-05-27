@@ -1,4 +1,6 @@
 ﻿using System;
+using ThrowHelper;
+
 namespace FluentCodeMetrics.Core.TypeConstraints
 {
     public class NotTypeConstraint : TypeConstraint
@@ -11,6 +13,7 @@ namespace FluentCodeMetrics.Core.TypeConstraints
 
         public override bool Check(Type type)
         {
+            Throw.IfArgumentNull(type, "type");
             return !filterField.Check(type);
         }
     }

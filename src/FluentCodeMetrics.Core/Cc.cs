@@ -5,6 +5,7 @@ using System.Reflection;
 
 using Mono.Cecil.Cil;
 using FluentCodeMetrics.Core.Cecil;
+using ThrowHelper;
 
 namespace FluentCodeMetrics.Core
 {
@@ -35,6 +36,8 @@ namespace FluentCodeMetrics.Core
         // TODO: Support to overloaded methods
         public static Cc For(MethodInfo method)
         {
+            Throw.IfArgumentNull(method, "method");
+
             var methodBody = method.ToDefinition().Body;
             var methodInstructions = methodBody.Instructions;
 

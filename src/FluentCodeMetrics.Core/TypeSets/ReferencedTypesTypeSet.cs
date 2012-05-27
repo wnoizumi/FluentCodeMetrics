@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentCodeMetrics.Core.TypeConstraints;
+using ThrowHelper;
 
 namespace FluentCodeMetrics.Core.TypeSets
 {
@@ -35,6 +36,7 @@ namespace FluentCodeMetrics.Core.TypeSets
 
         public ReferencedTypesTypeSet FilterBy(TypeConstraint filter)
         {
+            Throw.IfArgumentNull(filter, "filter");
             return new ReferencedTypesTypeSet(
                 sourceField.Where(filter.Check),
                 originalField
