@@ -22,7 +22,7 @@ namespace FluentCodeMetrics.Core.Cecil
             return assembly.MainModule.Types.FirstOrDefault(t => t.FullName == type.FullName);
         }
 
-        public static MethodDefinition ToDefinition(this MethodInfo method)
+        public static MethodDefinition ToDefinition(this MethodBase method)
         {
             return method.DeclaringType.ToDefiniton().Methods
                 .First(m => m.Name == method.Name);
