@@ -32,10 +32,9 @@ namespace FluentCodeMetrics.Core
                 OpCodes.Brtrue, OpCodes.Brtrue_S
             };
 
-        // TODO: Support to overloaded methods
-        public static Cc For(MethodInfo method)
+        public static CodeMetric For(MethodBase constructor)
         {
-            var methodBody = method.ToDefinition().Body;
+            var methodBody = constructor.ToDefinition().Body;
             var methodInstructions = methodBody.Instructions;
 
             var ccInstructions =
@@ -47,9 +46,9 @@ namespace FluentCodeMetrics.Core
                 )
                 select instruction;
 
-            Func<Instruction, int> ccWeight = instruction => 
+            Func<Instruction, int> ccWeight = instruction =>
                 instruction.OpCode == OpCodes.Switch
-                ? ((Instruction[]) instruction.Operand).Length
+                ? ((Instruction[])instruction.Operand).Length
                 : 1;
 
             var ccCatchs = methodBody.ExceptionHandlers.Count(c => c.CatchType != null);

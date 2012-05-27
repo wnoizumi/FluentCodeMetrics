@@ -20,8 +20,6 @@ namespace FluentCodeMetrics.Specs
         {
             workingType = Type.GetType(tipo);
             workingType.Should().Not.Be.Null();
-
-
         }
 
         private MethodInfo workingMethod;
@@ -43,6 +41,12 @@ namespace FluentCodeMetrics.Specs
             resultingMetric = Ce.For(workingType);
         }
 
+        [When(@"desejo obter a complexidade ciclomática de seu construtor padrão")]
+        public void QuandoDesejoObterAComplexidadeCiclomaticaDeSeuConstrutor()
+        {
+            ConstructorInfo constructor = workingType.GetConstructor(new Type[0]);
+            resultingMetric = Cc.For(constructor);
+        }
         
         [When(@"tenho um fitro de referências que desejo ignorar")]
         public void QuandoTenhoUmFitroDeReferenciasQueDesejoIgnorar()
