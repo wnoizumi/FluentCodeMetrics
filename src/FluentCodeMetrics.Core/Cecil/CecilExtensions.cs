@@ -11,7 +11,9 @@ namespace FluentCodeMetrics.Core.Cecil
         public static Type ToType(this TypeReference reference)
         {
             TypeDefinition definition = reference.Resolve();
-            return Type.GetType(string.Format("{0}, {1}", definition.FullName, definition.Module.Assembly.FullName));
+            return Type.GetType(
+                string.Format("{0}, {1}", definition.FullName, definition.Module.Assembly.FullName)
+                );
         }
 
         public static TypeDefinition ToDefiniton(this Type type)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Collections.Generic;
+using ThrowHelper;
 
 namespace FluentCodeMetrics.Core.TypeSets
 {
@@ -20,6 +21,7 @@ namespace FluentCodeMetrics.Core.TypeSets
 
         public static TypeSet FromAssembly(Assembly assembly)
         {
+            Throw.IfArgumentNull(assembly, "assembly");
             return new CollectionTypeSet(assembly.GetTypes());
                 // AssemblyTypeSet(assembly);
         }

@@ -4,6 +4,7 @@ using System.Linq;
 using FluentCodeMetrics.Core.TypeConstraints;
 using FluentCodeMetrics.Core.TypeSets;
 using System.Collections.Generic;
+using ThrowHelper;
 
 namespace FluentCodeMetrics.Core
 {
@@ -20,6 +21,7 @@ namespace FluentCodeMetrics.Core
 
         public Ce Ignoring(TypeConstraint toIgnore)
         {
+            Throw.IfArgumentNull(toIgnore, "toIgnore");
             return FilterBy(toIgnore.Not());
         }
 
@@ -30,6 +32,8 @@ namespace FluentCodeMetrics.Core
 
         public static TypeSetCe For(TypeSet typeSet)
         {
+            Throw.IfArgumentNull(typeSet, "typeSet");
+
             var source = from type in typeSet
                          select For(type);
 
@@ -38,6 +42,8 @@ namespace FluentCodeMetrics.Core
 
         public static TypeCe For(Type type)
         {
+            Throw.IfArgumentNull(type, "type");
+
             var references = ReferencesInspector.For(type)
                 .Where(type.NestedTypes().Not());
             return new TypeCe(references, type);
@@ -106,6 +112,7 @@ namespace FluentCodeMetrics.Core
 
         public override Ce FilterBy(TypeConstraint filter)
         {
+            Throw.IfArgumentNull(filter, "filter");
             var newSource = source.Select(ceResult => ceResult.FilterBy(filter)).ToList();
             return new TypeSetCe(newSource);
         }

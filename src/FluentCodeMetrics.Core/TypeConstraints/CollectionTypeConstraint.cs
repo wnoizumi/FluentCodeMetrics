@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ThrowHelper;
 
 namespace FluentCodeMetrics.Core.TypeConstraints
 {
@@ -16,6 +17,7 @@ namespace FluentCodeMetrics.Core.TypeConstraints
 
         public override bool Check(Type type)
         {
+            Throw.IfArgumentNull(type, "type");
             return typesField.Contains(type);
         }
     }

@@ -9,6 +9,7 @@ using Mono.Cecil.Cil;
 
 using TypeFilter = FluentCodeMetrics.Core.TypeConstraints.TypeConstraint;
 using FluentCodeMetrics.Core.TypeSets;
+using ThrowHelper;
 
 namespace FluentCodeMetrics.Core
 {
@@ -36,6 +37,7 @@ namespace FluentCodeMetrics.Core
 
         public static ReferencesInspector For(Type type)
         {
+            Throw.IfArgumentNull(type, "type");
             return new ReferencesInspector(type);
         }
 
@@ -223,6 +225,7 @@ namespace FluentCodeMetrics.Core
         public ReferencedTypesTypeSet
             Where(TypeFilter filter)
         {
+            Throw.IfArgumentNull(filter, "filter");
             return All().FilterBy(filter);
         }
 

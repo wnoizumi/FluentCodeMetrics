@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ThrowHelper;
 
 namespace FluentCodeMetrics.Core.TypeSets
 {
@@ -8,6 +9,7 @@ namespace FluentCodeMetrics.Core.TypeSets
         private IEnumerable<Type> source; 
         public CollectionTypeSet(IEnumerable<Type> source)
         {
+            Throw.IfArgumentNull(source, "source");
             this.source = source;
         }
 

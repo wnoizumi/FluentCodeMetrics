@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using FluentCodeMetrics.Core.TypeSets;
+using ThrowHelper;
 
 namespace FluentCodeMetrics.Core.TypeConstraints
 {
@@ -10,11 +11,13 @@ namespace FluentCodeMetrics.Core.TypeConstraints
 
         public TypeConstraint Or(TypeConstraint filter)
         {
+            Throw.IfArgumentNull(filter, "filter");
             return Or(this, filter);
         }
 
         public TypeConstraint And(TypeConstraint filter)
         {
+            Throw.IfArgumentNull(filter, "filter");
             return And(this, filter);
         }
 
@@ -25,11 +28,13 @@ namespace FluentCodeMetrics.Core.TypeConstraints
 
         public static implicit operator TypeConstraint(Type type)
         {
+            Throw.IfArgumentNull(type, "type");
             return EqualsTo(type);
         }
 
         public static implicit operator TypeConstraint(Assembly assembly)
         {
+            Throw.IfArgumentNull(assembly, "assembly");
             return FromAssembly(assembly);
         }
 
@@ -40,11 +45,13 @@ namespace FluentCodeMetrics.Core.TypeConstraints
 
         public static TypeConstraint FromAssembly(Assembly assembly)
         {
+            Throw.IfArgumentNull(assembly, "assembly");
             return new FromAssemblyTypeConstraint(assembly);
         }
 
         public static TypeConstraint Not(TypeConstraint filter)
         {
+            Throw.IfArgumentNull(filter, "filter");
             return new NotTypeConstraint(filter);
         }
 
@@ -72,6 +79,7 @@ namespace FluentCodeMetrics.Core.TypeConstraints
 
         public static TypeConstraint EqualsTo(Type type)
         {
+            Throw.IfArgumentNull(type, "type");
             return new EqualsToTypeConstraint(type);
         }
 

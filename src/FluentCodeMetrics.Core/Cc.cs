@@ -5,6 +5,7 @@ using System.Reflection;
 
 using Mono.Cecil.Cil;
 using FluentCodeMetrics.Core.Cecil;
+using ThrowHelper;
 
 namespace FluentCodeMetrics.Core
 {
@@ -32,9 +33,10 @@ namespace FluentCodeMetrics.Core
                 OpCodes.Brtrue, OpCodes.Brtrue_S
             };
 
-        public static CodeMetric For(MethodBase constructor)
+        public static CodeMetric For(MethodBase method)
         {
-            var methodBody = constructor.ToDefinition().Body;
+            Throw.IfArgumentNull(method, "method");
+            var methodBody = method.ToDefinition().Body;
             var methodInstructions = methodBody.Instructions;
 
             var ccInstructions =
