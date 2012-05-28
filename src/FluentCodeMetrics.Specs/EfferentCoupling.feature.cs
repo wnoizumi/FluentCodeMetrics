@@ -81,6 +81,7 @@ considero também as referências ""herdadas"".", ProgrammingLanguage.CSharp, ((
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Calcular Acoplamento Eferente para um tipo")]
         [NUnit.Framework.TestCaseAttribute("Samples.EmptyClass", "8", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.AbstractMethod", "8", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.SingleArgCtor", "9", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.SingleArgVoidMethod", "9", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.FeeMethod", "9", new string[0])]

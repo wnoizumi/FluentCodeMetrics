@@ -39,6 +39,7 @@ Funcionalidade: Calcular Acoplamento Eferente (Ce)
 		Exemplos: 
 			| tipo                                | ce |
 			| Samples.EmptyClass                  | 8  |
+			| Samples.AbstractMethod              | 8  |
 			| Samples.SingleArgCtor               | 9  |
 			| Samples.SingleArgVoidMethod         | 9  |
 			| Samples.FeeMethod                   | 9  |

@@ -75,6 +75,7 @@ namespace FluentCodeMetrics.Core
 
             var source =
                 from method in typeDef.Methods
+                where !method.IsAbstract && method.HasBody
                 from instruction in method.Body.Instructions
                 where instruction.OpCode == opCode
                 let operand = instruction.Operand as MethodReference
@@ -96,6 +97,7 @@ namespace FluentCodeMetrics.Core
                 return new ReferencedTypesTypeSet(other, workingType);
 
             var source = from method in typeDef.Methods
+                         where !method.IsAbstract && method.HasBody
                          from exceptionHandler in method.Body.ExceptionHandlers
                          where exceptionHandler.CatchType != null
                          let type = exceptionHandler.CatchType.ToType()

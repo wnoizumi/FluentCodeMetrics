@@ -20,8 +20,6 @@ namespace FluentCodeMetrics.Specs
         {
             workingType = Type.GetType(tipo);
             workingType.Should().Not.Be.Null();
-
-
         }
 
         private MethodInfo workingMethod;
@@ -43,6 +41,11 @@ namespace FluentCodeMetrics.Specs
             resultingMetric = Ce.For(workingType);
         }
 
+        [When(@"desejo obter seu acoplamento aferente")]
+        public void QuandoDesejoObterSeuAcoplamentoAferente()
+        {
+            resultingMetric = Ca.For(workingType);
+        }
         
         [When(@"tenho um fitro de referências que desejo ignorar")]
         public void QuandoTenhoUmFitroDeReferenciasQueDesejoIgnorar()

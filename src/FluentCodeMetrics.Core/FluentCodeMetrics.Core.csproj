@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ca.cs" />
     <Compile Include="Cc.cs" />
     <Compile Include="Ce.cs" />
     <Compile Include="Cecil\CecilExtensions.cs" />
