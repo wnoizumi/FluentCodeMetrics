@@ -45,6 +45,13 @@ namespace FluentCodeMetrics.Specs
         public void QuandoDesejoObterSeuAcoplamentoAferente()
         {
             resultingMetric = Ca.For(workingType);
+		}
+		
+        [When(@"desejo obter a complexidade ciclomática de seu construtor padrão")]
+        public void QuandoDesejoObterAComplexidadeCiclomaticaDeSeuConstrutor()
+        {
+            ConstructorInfo constructor = workingType.GetConstructor(new Type[0]);
+            resultingMetric = Cc.For(constructor);
         }
         
         [When(@"tenho um fitro de referências que desejo ignorar")]

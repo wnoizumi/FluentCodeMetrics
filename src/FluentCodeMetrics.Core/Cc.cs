@@ -5,6 +5,7 @@ using System.Reflection;
 
 using Mono.Cecil.Cil;
 using FluentCodeMetrics.Core.Cecil;
+using ThrowHelper;
 
 namespace FluentCodeMetrics.Core
 {
@@ -32,9 +33,9 @@ namespace FluentCodeMetrics.Core
                 OpCodes.Brtrue, OpCodes.Brtrue_S
             };
 
-        // TODO: Support to overloaded methods
-        public static Cc For(MethodInfo method)
+        public static CodeMetric For(MethodBase method)
         {
+            Throw.IfArgumentNull(method, "method");
             var methodBody = method.ToDefinition().Body;
             var methodInstructions = methodBody.Instructions;
 
@@ -47,9 +48,9 @@ namespace FluentCodeMetrics.Core
                 )
                 select instruction;
 
-            Func<Instruction, int> ccWeight = instruction => 
+            Func<Instruction, int> ccWeight = instruction =>
                 instruction.OpCode == OpCodes.Switch
-                ? ((Instruction[]) instruction.Operand).Length
+                ? ((Instruction[])instruction.Operand).Length
                 : 1;
 
             var ccCatchs = methodBody.ExceptionHandlers.Count(c => c.CatchType != null);

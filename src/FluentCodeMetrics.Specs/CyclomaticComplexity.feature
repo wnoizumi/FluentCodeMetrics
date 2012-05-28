@@ -21,8 +21,21 @@ Funcionalidade: Calcular Complexidade Ciclomática (Cc)
 			| Samples.MyClass | PrintHelloTenTimesUsingWhile | 2  |
 			| Samples.MyClass | GetGenreGreeting             | 3  |
 			| Samples.MyClass | TryCatchMethod               | 3  |
+			| Samples.MyClass | IHaveABadSmell               | 12 |
+			| Samples.MyClass | set_DayOfBirth               | 1  |
+			| Samples.MyClass | get_DayOfBirth               | 1  |
+			| Samples.MyClass | get_Name                     | 1  |
+			| Samples.MyClass | get_Age                      | 2  |
 
-			
+	Esquema do Cenário: Calcular Complexidade Ciclomática para um construtor
+		Dado que tenho um <tipo>
+		Quando desejo obter a complexidade ciclomática de seu construtor padrão
+		Então obtenho <cc>
+		
+		Exemplos: 
+			| tipo               | cc |
+			| Samples.EmptyClass | 1  |
+			| Samples.MyClass    | 2  |
 
 
 

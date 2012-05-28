@@ -182,9 +182,35 @@ namespace Samples
 
     public class MyClass
     {
+        public MyClass()
+        {
+            if (DateTime.Today.Equals(new DateTime(2012, 12, 21)))
+                throw new Exception("Goodbye cruel world, I'm leaving you today, Goodbye, Goodbye, Goodbye");
+        }
+
         public void EmptyVoidMethod()
         {
             
+        }
+
+        public string Name 
+        {
+            get { return "My name is Bond..."; }
+        }
+
+        public DateTime DayOfBirth
+        {
+            get; set;
+        }
+
+        public int Age 
+        {
+            get { 
+                if (DateTime.Now.Year <= 1950)
+                    return 0;
+
+                return DateTime.Now.Year - 1950;
+            }
         }
 
         public string GetGreetingMessage()
@@ -247,6 +273,41 @@ namespace Samples
             }
         }
 
+        public void IHaveABadSmell()
+        {
+            int hour = DateTime.Now.Year;
+            int minute = DateTime.Now.Minute;
+            int second = DateTime.Now.Second;
+            
+            if (hour <= 12)
+            {
+                if (minute >= 0 && minute < 30)
+                {
+                    if (second >= 0 && second < 30)
+                    {
+                        try
+                        {
+
+                        }
+                        catch { }
+                        finally { }
+                    }
+                }
+            }
+            else
+            {
+                if (minute >= 0 && minute < 30)
+                {
+                    if (second >= 0 && second < 30)
+                    {
+                        do
+                        {
+                            second--;
+                        } while (second <= 30);
+                    }
+                }
+            }
+        }
     }
 
     public enum Genre

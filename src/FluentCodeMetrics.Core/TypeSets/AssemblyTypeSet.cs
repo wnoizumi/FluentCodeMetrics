@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Reflection;
+using ThrowHelper;
 
 namespace FluentCodeMetrics.Core.TypeSets
 {
@@ -12,6 +13,7 @@ namespace FluentCodeMetrics.Core.TypeSets
 
         public AssemblyTypeSet(Assembly source)
         {
+            Throw.IfArgumentNull(source, "source");
             this.source = source;
         }
 
