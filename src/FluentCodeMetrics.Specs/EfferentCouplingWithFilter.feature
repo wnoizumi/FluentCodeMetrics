@@ -23,6 +23,8 @@ Funcionalidade: Calcular Acoplamento Eferente (Ce) com um Filtro
 		Exemplos: 
 			| tipo                                | ce |
 			| Samples.EmptyClass                  | 0  |
+			| Samples.AbstractMethod              | 1  |
+			| Samples.VirtualMethod               | 0  |
 			| Samples.SingleArgCtor               | 1  |
 			| Samples.SingleArgVoidMethod         | 1  |
 			| Samples.FeeMethod                   | 1  |
@@ -49,6 +51,8 @@ Funcionalidade: Calcular Acoplamento Eferente (Ce) com um Filtro
 		Exemplos: 
 			| tipo                                | ce |
 			| Samples.EmptyClass                  | 0  |
+			| Samples.AbstractMethod              | 1  |
+			| Samples.VirtualMethod               | 0  |
 			| Samples.SingleArgCtor               | 1  |
 			| Samples.SingleArgVoidMethod         | 1  |
 			| Samples.FeeMethod                   | 1  |
@@ -75,6 +79,8 @@ Funcionalidade: Calcular Acoplamento Eferente (Ce) com um Filtro
 		Exemplos: 
 			| tipo                                | ce |
 			| Samples.EmptyClass                  | 0  |
+			| Samples.AbstractMethod              | 1  |
+			| Samples.VirtualMethod               | 0  |
 			| Samples.SingleArgCtor               | 1  |
 			| Samples.SingleArgVoidMethod         | 1  |
 			| Samples.FeeMethod                   | 1  |
