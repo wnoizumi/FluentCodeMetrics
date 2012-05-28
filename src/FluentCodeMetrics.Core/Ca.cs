@@ -30,9 +30,7 @@ namespace FluentCodeMetrics.Core
 
         private static IEnumerable<Type> GetTypesThatReferences(Type type)
         { 
-            var allTypes = (from a in type.Assembly.GetReferencedAssemblies()
-                            from t in Assembly.Load(a).GetTypes()
-                            select t).Distinct().Union(type.Assembly.GetTypes());
+            var allTypes = type.Assembly.GetTypes();
 
             foreach (Type t in allTypes)
             {
