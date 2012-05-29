@@ -4,7 +4,7 @@ using ThrowHelper;
 
 namespace FluentCodeMetrics.Core.TypeSets
 {
-    public class CollectionTypeSet : TypeSet
+    public sealed class CollectionTypeSet : TypeSet
     {
         private IEnumerable<Type> source; 
         public CollectionTypeSet(IEnumerable<Type> source)

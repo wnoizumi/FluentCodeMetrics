@@ -6,7 +6,7 @@ using ThrowHelper;
 
 namespace FluentCodeMetrics.Core.TypeConstraints
 {
-    public class CollectionTypeConstraint : TypeConstraint
+    public sealed class CollectionTypeConstraint : TypeConstraint
     {
         private readonly IEnumerable<Type> typesField;
 

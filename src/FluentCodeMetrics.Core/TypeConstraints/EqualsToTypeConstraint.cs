@@ -3,7 +3,7 @@ using ThrowHelper;
 
 namespace FluentCodeMetrics.Core.TypeConstraints
 {
-    public class EqualsToTypeConstraint : TypeConstraint
+    public sealed class EqualsToTypeConstraint : TypeConstraint
     {
         private readonly Type typeField;
 

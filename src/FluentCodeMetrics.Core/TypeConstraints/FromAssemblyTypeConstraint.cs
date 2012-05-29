@@ -4,7 +4,7 @@ using ThrowHelper;
 
 namespace FluentCodeMetrics.Core.TypeConstraints
 {
-    public class FromAssemblyTypeConstraint : TypeConstraint
+    public sealed class FromAssemblyTypeConstraint : TypeConstraint
     {
         private readonly Assembly assemblyField;
 

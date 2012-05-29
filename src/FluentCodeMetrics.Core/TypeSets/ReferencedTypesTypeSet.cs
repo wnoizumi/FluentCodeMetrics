@@ -6,7 +6,7 @@ using ThrowHelper;
 
 namespace FluentCodeMetrics.Core.TypeSets
 {
-    public class ReferencedTypesTypeSet : 
+    public sealed class ReferencedTypesTypeSet : 
         TypeSet
     {
         private readonly IEnumerable<Type> sourceField;

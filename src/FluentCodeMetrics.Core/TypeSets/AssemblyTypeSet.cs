@@ -7,7 +7,7 @@ using ThrowHelper;
 
 namespace FluentCodeMetrics.Core.TypeSets
 {
-    public class AssemblyTypeSet : TypeSet
+    public sealed class AssemblyTypeSet : TypeSet
     {
         private readonly Assembly source;
 

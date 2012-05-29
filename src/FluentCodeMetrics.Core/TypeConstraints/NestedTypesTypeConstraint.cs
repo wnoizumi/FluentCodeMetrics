@@ -6,7 +6,7 @@ using ThrowHelper;
 
 namespace FluentCodeMetrics.Core.TypeConstraints
 {
-    public class NestedTypesTypeConstraint : TypeConstraint
+    public sealed class NestedTypesTypeConstraint : TypeConstraint
     {
         private readonly Type declaringType;
 

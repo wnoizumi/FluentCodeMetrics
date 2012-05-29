@@ -3,7 +3,7 @@ using ThrowHelper;
 
 namespace FluentCodeMetrics.Core.TypeConstraints
 {
-    public class NotTypeConstraint : TypeConstraint
+    public sealed class NotTypeConstraint : TypeConstraint
     {
         private readonly TypeConstraint filterField;
         internal NotTypeConstraint(TypeConstraint filter)
