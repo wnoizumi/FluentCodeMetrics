@@ -22,7 +22,7 @@ namespace FluentCodeMetrics.Core
             get { return value; }
         }
 
-        static OpCode[] ccBranchOpCodes = new[]
+        static readonly OpCode[] CcBranchOpCodes = new[]
             {
                 OpCodes.Beq, OpCodes.Beq_S, OpCodes.Bge, OpCodes.Bge_S,
                 OpCodes.Bge_Un, OpCodes.Bge_Un_S, OpCodes.Bgt, OpCodes.Bgt_S,
@@ -42,7 +42,7 @@ namespace FluentCodeMetrics.Core
             var ccInstructions =
                 from instruction in methodInstructions
                 where (
-                    ccBranchOpCodes.Contains(instruction.OpCode) ||
+                    CcBranchOpCodes.Contains(instruction.OpCode) ||
                     instruction.OpCode == OpCodes.Switch ||
                     instruction.OpCode == OpCodes.Ret
                 )

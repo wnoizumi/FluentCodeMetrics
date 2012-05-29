@@ -16,3 +16,4 @@ src/GlobalInfo.cs
 *.ncrunchproject
 *.cache
 NDependOut/
+*.ndproj
