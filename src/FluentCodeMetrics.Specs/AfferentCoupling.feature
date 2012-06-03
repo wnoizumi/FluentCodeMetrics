@@ -14,4 +14,5 @@ Funcionalidade: Calcular Acoplamento Aferente (Ca)
 			| tipo                     | ca |
 			| Samples.Ca.Foo           | 1  |
 			| Samples.Ca.FooCalculator | 0  |
+			| Samples.Ca.BarAttribute  | 1  |
 			| Samples.Ca.FooException  | 2  |

@@ -199,7 +199,32 @@ namespace FluentCodeMetrics.Core
             return new ReferencedTypesTypeSet(other.Union(source), workingType);
         }
 
+        public bool Contains(Type type)
+        {
+            Func<ReferencedTypesTypeSet>[] functions = new Func<ReferencedTypesTypeSet>[] { 
+                FromBaseType,
+                FromFields,
+                FromProperties,
+                FromMethodsReturnTypes,
+                FromMethodsParameters,
+                FromNewobjInstructions,
+                FromMetaAttributes,
+                FromCtorParameters,
+                FromStaticMethodCalls,
+                FromExceptionHandlers,
+                FromFieldsMetaAttributes,
+                FromMethodsMetaAttributes,
+                FromParametersMetaAttributes
+            };
 
+            foreach (var function in functions)
+            {
+                if (function.Invoke().Contains(type))
+                    return true;
+            }
+
+            return false;
+        }
 
         public ReferencedTypesTypeSet
             All()
@@ -230,7 +255,5 @@ namespace FluentCodeMetrics.Core
             Throw.IfArgumentNull(filter, "filter");
             return All().FilterBy(filter);
         }
-
-
     }
 }

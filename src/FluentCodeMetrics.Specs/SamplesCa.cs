@@ -18,7 +18,17 @@ namespace Samples.Ca
         }
     }
 
+    [BarAttribute]
     public class FooException : Exception
+    {
+        [BarAttribute]
+        public void Add([BarAttribute] string param)
+        { 
+        
+        }
+    }
+
+    public class BarAttribute : Attribute
     {
 
     }

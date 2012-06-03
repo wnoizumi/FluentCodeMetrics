@@ -69,6 +69,7 @@ namespace FluentCodeMetrics.Specs
         [NUnit.Framework.DescriptionAttribute("Calcular Acoplamento Aferente para um tipo")]
         [NUnit.Framework.TestCaseAttribute("Samples.Ca.Foo", "1", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.Ca.FooCalculator", "0", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.Ca.BarAttribute", "1", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Samples.Ca.FooException", "2", new string[0])]
         public virtual void CalcularAcoplamentoAferenteParaUmTipo(string tipo, string ca, string[] exampleTags)
         {

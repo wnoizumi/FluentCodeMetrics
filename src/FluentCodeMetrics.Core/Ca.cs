@@ -28,14 +28,15 @@ namespace FluentCodeMetrics.Core
             return new Ca(types);
         }
 
-        private static IEnumerable<Type> GetTypesThatReferences(Type type)
+        private static IEnumerable<Type> GetTypesThatReferences(Type target)
         { 
-            var allTypes = type.Assembly.GetTypes();
+            //TODO: Need to inspect more assemblies
+            var allTypes = target.Assembly.GetTypes();
 
-            foreach (Type t in allTypes)
+            foreach (Type type in allTypes)
             {
-                if (ReferencesInspector.For(t).All().Contains(type))
-                    yield return t;
+                if (ReferencesInspector.For(type).Contains(target))
+                    yield return type;
             }
         }
     }
