@@ -201,6 +201,8 @@ namespace FluentCodeMetrics.Core
 
         public bool Contains(Type type)
         {
+            Throw.IfArgumentNull(type, "type");
+
             Func<ReferencedTypesTypeSet>[] functions = new Func<ReferencedTypesTypeSet>[] { 
                 FromBaseType,
                 FromFields,
