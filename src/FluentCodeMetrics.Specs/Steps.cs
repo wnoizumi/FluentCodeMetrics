@@ -41,6 +41,12 @@ namespace FluentCodeMetrics.Specs
             resultingMetric = Ce.For(workingType);
         }
 
+        [When(@"desejo obter seu acoplamento aferente")]
+        public void QuandoDesejoObterSeuAcoplamentoAferente()
+        {
+            resultingMetric = Ca.For(workingType);
+		}
+		
         [When(@"desejo obter a complexidade ciclomática de seu construtor padrão")]
         public void QuandoDesejoObterAComplexidadeCiclomaticaDeSeuConstrutor()
         {

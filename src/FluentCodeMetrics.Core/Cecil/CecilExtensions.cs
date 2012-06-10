@@ -18,7 +18,7 @@ namespace FluentCodeMetrics.Core.Cecil
 
         public static TypeDefinition ToDefiniton(this Type type)
         {
-            var assembly = AssemblyCache.Load(type.Assembly.GetName().Name);
+            var assembly = AssemblyCache.Load(type.Assembly);
             return assembly.MainModule.Types.FirstOrDefault(t => t.FullName == type.FullName);
         }
 

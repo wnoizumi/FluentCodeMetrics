@@ -12,6 +12,19 @@ namespace Samples
     {
     }
 
+    public abstract class AbstractMethod
+    {
+        public abstract Fee DoSomething();
+    }
+
+    public class VirtualMethod
+    {
+        public virtual void DoSomething()
+        { 
+            
+        }
+    }
+
     public class SingleArgCtor
     {
 // ReSharper disable UnusedParameter.Local

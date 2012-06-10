@@ -2,26 +2,24 @@
 using System.IO;
 using Mono.Cecil;
 using System;
+using System.Reflection;
 
 namespace FluentCodeMetrics.Core.Cecil
 {
     public static class AssemblyCache
     {
-        private static readonly Dictionary<string, AssemblyDefinition>
-            Dictionary = new Dictionary<string, AssemblyDefinition>();
+        private static readonly Dictionary<Assembly, AssemblyDefinition>
+            Dictionary = new Dictionary<Assembly, AssemblyDefinition>();
 
-        public static AssemblyDefinition Load(string assemblyName)
+        public static AssemblyDefinition Load(Assembly assembly)
         {
-            if (!File.Exists(assemblyName))
-                assemblyName = assemblyName + ".dll";
-
-            if (!Dictionary.ContainsKey(assemblyName))
+            if (!Dictionary.ContainsKey(assembly))
                 Dictionary.Add(
-                    assemblyName,
-                    AssemblyDefinition.ReadAssembly(assemblyName)
+                    assembly,
+                    AssemblyDefinition.ReadAssembly(assembly.ManifestModule.FullyQualifiedName)
                     );
 
-            return Dictionary[assemblyName];
+            return Dictionary[assembly];
         }
     }
 }

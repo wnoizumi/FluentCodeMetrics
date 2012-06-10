@@ -52,6 +52,10 @@
     <Compile Include="..\FluentCodeMetrics.Specs\Samples.cs">
       <Link>Samples.cs</Link>
     </Compile>
+    <Compile Include="..\FluentCodeMetrics.Specs\SamplesCa.cs">
+      <Link>SamplesCa.cs</Link>
+    </Compile>
+    <Compile Include="CaTests.cs" />
     <Compile Include="CeTests.cs" />
     <Compile Include="ReferencesInspectorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
