@@ -13,7 +13,7 @@ using ThrowHelper;
 
 namespace FluentCodeMetrics.Core
 {
-    public class ReferencesInspector
+    public sealed class ReferencesInspector
     {
         private readonly Type workingType;
         private readonly IEnumerable<Type> other;

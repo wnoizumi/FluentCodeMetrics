@@ -3,7 +3,7 @@ using ThrowHelper;
 
 namespace FluentCodeMetrics.Core.TypeConstraints
 {
-    public class OrTypeConstraint : TypeConstraint
+    public sealed class OrTypeConstraint : TypeConstraint
     {
         private readonly TypeConstraint leftField;
         private readonly TypeConstraint rightField;
