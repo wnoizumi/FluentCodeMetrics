@@ -57,6 +57,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AfferentCoupling.feature</DependentUpon>
     </Compile>
+    <Compile Include="AfferentCouplingIncludingAssemblies.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AfferentCouplingIncludingAssemblies.feature</DependentUpon>
+    </Compile>
     <Compile Include="CyclomaticComplexity.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -82,6 +87,10 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>AfferentCoupling.feature.cs</LastGenOutput>
     </None>
+    <None Include="AfferentCouplingIncludingAssemblies.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AfferentCouplingIncludingAssemblies.feature.cs</LastGenOutput>
+    </None>
     <None Include="App.config" />
     <None Include="CyclomaticComplexity.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
@@ -101,6 +110,10 @@
     <ProjectReference Include="..\FluentCodeMetrics.Core\FluentCodeMetrics.Core.csproj">
       <Project>{76E1A53D-F8EB-4AD1-A589-F7E6059E0503}</Project>
       <Name>FluentCodeMetrics.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FluentCodeMetrics.Specs.AnotherAssemblySamples\FluentCodeMetrics.Specs.AnotherAssemblySamples.csproj">
+      <Project>{197ED343-E656-447C-930D-6F8BFA401460}</Project>
+      <Name>FluentCodeMetrics.Specs.AnotherAssemblySamples</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

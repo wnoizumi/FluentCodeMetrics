@@ -13,12 +13,24 @@ namespace FluentCodeMetrics.Specs
     public class Steps
     {
         private CodeMetric resultingMetric;
+        private string workingAssemblyName;
         private Type workingType;
-        
+
+        [Given(@"vou trabalhar com o (.*)")]
+        public void DadoVouTrabalharComO(string nomeDoAssembly)
+        {
+            workingAssemblyName = nomeDoAssembly;
+            workingAssemblyName.Should().Not.Be.NullOrEmpty();
+        }
+
         [Given(@"que tenho um (.*)")]
         public void DadoQueTenhoUm(string tipo)
         {
-            workingType = Type.GetType(tipo);
+            if (String.IsNullOrEmpty(workingAssemblyName))
+                workingType = Type.GetType(tipo);
+            else
+                workingType = Type.GetType(Assembly.CreateQualifiedName(workingAssemblyName, tipo));
+
             workingType.Should().Not.Be.Null();
         }
 
@@ -59,13 +71,19 @@ namespace FluentCodeMetrics.Specs
         {
         }
 
+        [When(@"considero as referências vindas do assembly (.*)")]
+        public void QuandoConsideroAsReferenciasVindasDoAssembly(string nomeDoAssemblyExterno)
+        {
+            Assembly assemblyExterno = Assembly.Load(nomeDoAssemblyExterno);
+            resultingMetric = ((Ca)resultingMetric).Including(assemblyExterno);
+        }
+
         [When(@"desejo ignorar referências para tipos de outros assemblies")]
         [Given(@"desejo ignorar referências para tipos de outros assemblies")]
         public void DesejoIgnorarReferenciasParaTiposDeOutrosAssemblies()
         {
             resultingMetric = ((Ce)resultingMetric).Ignoring(GetType().Assembly.Not());
         }
-
 
         [When(@"esse filtro relaciona (.*)")]
         public void QuandoEsseFiltroRelaciona(string tipo)

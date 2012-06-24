@@ -19,21 +19,21 @@ namespace FluentCodeMetrics.Specs
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.8.1.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Calcular Acoplamento Aferente (Ca)")]
-    public partial class CalcularAcoplamentoAferenteCaFeature
+    [NUnit.Framework.DescriptionAttribute("Calcular Acoplamento Aferente (Ca) incluindo assemblies na contagem")]
+    public partial class CalcularAcoplamentoAferenteCaIncluindoAssembliesNaContagemFeature
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "AfferentCoupling.feature"
+#line 1 "AfferentCouplingIncludingAssemblies.feature"
 #line hidden
         
         [NUnit.Framework.TestFixtureSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt-BR"), "Calcular Acoplamento Aferente (Ca)", "\r\nAcomplamento Aferente é uma métrica que indica a quantidade\r\nde tipos que refer" +
-                    "enciam um determinado tipo.", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt-BR"), "Calcular Acoplamento Aferente (Ca) incluindo assemblies na contagem", "\r\nElvis deseja calcular o acoplamento aferente para alguns tipos,\r\nentretanto, el" +
+                    "e deseja que referências de outros assemblies também sejam consideradas.", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -67,21 +67,22 @@ namespace FluentCodeMetrics.Specs
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Calcular Acoplamento Aferente para um tipo")]
-        [NUnit.Framework.TestCaseAttribute("Samples.Ca.Foo", "1", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("Samples.Ca.FooCalculator", "0", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("Samples.Ca.BarAttribute", "1", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("Samples.Ca.FooException", "2", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("Samples.Ca.ClassWhichReferencesExternalFoo", "0", new string[0])]
-        public virtual void CalcularAcoplamentoAferenteParaUmTipo(string tipo, string ca, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("Samples.Ca.Foo", "FluentCodeMetrics.Specs", "FluentCodeMetrics.Specs", "1", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("AnotherAssembly.Samples.Ca.ExternalFoo", "FluentCodeMetrics.Specs.AnotherAssemblySamples", "FluentCodeMetrics.Specs", "1", new string[0])]
+        public virtual void CalcularAcoplamentoAferenteParaUmTipo(string tipo, string assembly, string assemblyExterno, string ca, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calcular Acoplamento Aferente para um tipo", exampleTags);
 #line 8
  this.ScenarioSetup(scenarioInfo);
 #line 9
-  testRunner.Given(string.Format("que tenho um {0}", tipo));
+  testRunner.Given(string.Format("vou trabalhar com o {0}", assembly));
 #line 10
-  testRunner.When("desejo obter seu acoplamento aferente");
+  testRunner.And(string.Format("que tenho um {0}", tipo));
 #line 11
+  testRunner.When("desejo obter seu acoplamento aferente");
+#line 12
+  testRunner.And(string.Format("considero as referências vindas do assembly {0}", assemblyExterno));
+#line 13
   testRunner.Then(string.Format("obtenho {0}", ca));
 #line hidden
             this.ScenarioCleanup();

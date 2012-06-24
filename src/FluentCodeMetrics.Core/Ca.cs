@@ -11,6 +11,7 @@ namespace FluentCodeMetrics.Core
 {
     public class Ca : CodeMetric
     {
+        private readonly Type target;
         private readonly IEnumerable<Type> references;
 
         public override int Value
@@ -23,9 +24,22 @@ namespace FluentCodeMetrics.Core
             get { return this.references; }
         }
 
-        public Ca(IEnumerable<Type> references)
+        public Ca(Type target, IEnumerable<Type> references)
         {
+            this.target = target;
             this.references = references;
+        }
+
+        public Ca Including(Assembly externalAssembly)
+        {
+            Throw.IfArgumentNull(externalAssembly, "externalAssembly");
+
+            if (externalAssembly.Equals(target.Assembly)) return this;
+
+            var allReferences = GetTypesThatReferencesFromAssembly(target, externalAssembly);
+            allReferences = allReferences.Concat(references);
+
+            return new Ca(target, allReferences);
         }
 
         public static Ca For<T>()
@@ -38,15 +52,17 @@ namespace FluentCodeMetrics.Core
             Throw.IfArgumentNull(type, "type");
 
             var types = GetTypesThatReferences(type);
-            return new Ca(types);
+            return new Ca(type, types);
         }
 
         private static IEnumerable<Type> GetTypesThatReferences(Type target)
         {
-            //TODO: Need to inspect more assemblies
-            var allTypes = target.Assembly.GetTypes();
+            return GetTypesThatReferencesFromAssembly(target, target.Assembly);
+        }
 
-            foreach (Type type in allTypes)
+        private static IEnumerable<Type> GetTypesThatReferencesFromAssembly(Type target, Assembly assembly)
+        {
+            foreach (Type type in assembly.GetTypes())
             {
                 if (ReferencesInspector.For(type).Contains(target))
                     yield return type;

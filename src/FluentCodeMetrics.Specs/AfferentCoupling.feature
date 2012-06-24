@@ -11,8 +11,9 @@ Funcionalidade: Calcular Acoplamento Aferente (Ca)
 		Então obtenho <ca>
 
 		Exemplos: 
-			| tipo                     | ca |
-			| Samples.Ca.Foo           | 1  |
-			| Samples.Ca.FooCalculator | 0  |
-			| Samples.Ca.BarAttribute  | 1  |
-			| Samples.Ca.FooException  | 2  |
+			| tipo                                       | ca |
+			| Samples.Ca.Foo                             | 1  |
+			| Samples.Ca.FooCalculator                   | 0  |
+			| Samples.Ca.BarAttribute                    | 1  |
+			| Samples.Ca.FooException                    | 2  |
+			| Samples.Ca.ClassWhichReferencesExternalFoo | 0  |			

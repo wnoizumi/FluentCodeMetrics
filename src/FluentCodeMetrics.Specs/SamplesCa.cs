@@ -47,4 +47,15 @@ namespace Samples.Ca
             }
         }
     }
+
+    public class ClassWhichReferencesExternalFoo
+    {
+        private AnotherAssembly.Samples.Ca.ExternalFoo externalFoo;
+
+        public AnotherAssembly.Samples.Ca.ExternalFoo ExternalFoo
+        {
+            get { return externalFoo; }
+            set { externalFoo = value; }
+        }
+    }
 }
