@@ -201,6 +201,46 @@ namespace FluentCodeMetrics.Specs
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Calcular o Acoplamento Eferente para todos os tipos do assembly, considerando ape" +
+            "nas tipos externos ao assembly")]
+        [NUnit.Framework.TestCaseAttribute("Samples.EmptyClass", "8", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.AbstractMethod", "8", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.VirtualMethod", "8", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.SingleArgCtor", "8", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.SingleArgVoidMethod", "8", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.FeeMethod", "8", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.DateTimeArgDateTimeMethod", "9", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.SingleProperty", "10", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.SingleField", "9", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.ExceptionRaiser", "9", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.SingleNonAutoProperty", "9", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.SingleEvent", "9", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.Attributes", "10", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.StaticMember", "10", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.ClassDependsOnASubClass", "8", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.StaticPropertyAndMethodCall", "10", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.TryCatch", "9", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.TryCatchCustomException", "8", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Samples.TryCatchWithUndefinedType", "8", new string[0])]
+        public virtual void CalcularOAcoplamentoEferenteParaTodosOsTiposDoAssemblyConsiderandoApenasTiposExternosAoAssembly(string tipo, string ce, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calcular o Acoplamento Eferente para todos os tipos do assembly, considerando ape" +
+                    "nas tipos externos ao assembly", exampleTags);
+#line 101
+ this.ScenarioSetup(scenarioInfo);
+#line 102
+  testRunner.Given("que desejo obter o acoplamento eferente de todos os tipos deste assembly");
+#line 103
+  testRunner.And("desejo ignorar referências para tipos deste assembly");
+#line 104
+  testRunner.Then(string.Format("Verifico o Ce de {0}", tipo));
+#line 105
+  testRunner.And(string.Format("constato que é {0}", ce));
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

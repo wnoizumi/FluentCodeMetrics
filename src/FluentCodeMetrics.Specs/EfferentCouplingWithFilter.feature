@@ -98,6 +98,36 @@ Funcionalidade: Calcular Acoplamento Eferente (Ce) com um Filtro
 			| Samples.TryCatchCustomException     | 1  |
 			| Samples.TryCatchWithUndefinedType   | 0  |
 
+	Esquema do Cenário: Calcular o Acoplamento Eferente para todos os tipos do assembly, considerando apenas tipos externos ao assembly
+		Dado que desejo obter o acoplamento eferente de todos os tipos deste assembly
+		E desejo ignorar referências para tipos deste assembly
+		Então Verifico o Ce de <tipo>
+		E constato que é <ce>
+
+		# Todo tipo tem no mínimo 8 dependêcias
+		# Maiores detalhes no arquivo EfferentCoupling.feature
+		Exemplos:
+			| tipo                                | ce |
+			| Samples.EmptyClass                  | 8  |
+			| Samples.AbstractMethod              | 8  |
+			| Samples.VirtualMethod               | 8  |
+			| Samples.SingleArgCtor               | 8  |
+			| Samples.SingleArgVoidMethod         | 8  |
+			| Samples.FeeMethod                   | 8  |
+			| Samples.DateTimeArgDateTimeMethod   | 9  |
+			| Samples.SingleProperty              | 10 |
+			| Samples.SingleField                 | 9  |
+			| Samples.ExceptionRaiser             | 9  |
+			| Samples.SingleNonAutoProperty       | 9  |
+			| Samples.SingleEvent                 | 9  |
+			| Samples.Attributes                  | 10 |
+			| Samples.StaticMember                | 10 |
+			| Samples.ClassDependsOnASubClass     | 8  |
+			| Samples.StaticPropertyAndMethodCall | 10 |
+			| Samples.TryCatch                    | 9  |
+			| Samples.TryCatchCustomException     | 8  |
+			| Samples.TryCatchWithUndefinedType   | 8  |
+
 
 
 

@@ -116,5 +116,10 @@ namespace FluentCodeMetrics.Specs
             typeCe.Value.Should().Be(valor);
         }
 
+        [Given(@"desejo ignorar referências para tipos deste assembly")]
+        public void DadoDesejoIgnorarReferenciasParaTiposDesteAssembly()
+        {
+            resultingMetric = ((Ce)resultingMetric).Ignoring(GetType().Assembly);
+        }
     }
 }
