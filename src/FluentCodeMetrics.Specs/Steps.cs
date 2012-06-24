@@ -29,6 +29,12 @@ namespace FluentCodeMetrics.Specs
             workingMethod = workingType.GetMethod(nomeDoMetodo);
         }
 
+        [Given(@"desejo ignorar referências para tipos deste assembly")]
+        public void DadoDesejoIgnorarReferenciasParaTiposDesteAssembly()
+        {
+            resultingMetric = ((Ce)resultingMetric).Ignoring(GetType().Assembly);
+        }
+
         [When(@"desejo obter sua Complexidade Ciclomática \(Cc\)")]
         public void QuandoDesejoObterSuaComplexidadeCiclomaticaCc()
         {
@@ -114,12 +120,6 @@ namespace FluentCodeMetrics.Specs
                 .First(ce => ce.Type == workingType);
 
             typeCe.Value.Should().Be(valor);
-        }
-
-        [Given(@"desejo ignorar referências para tipos deste assembly")]
-        public void DadoDesejoIgnorarReferenciasParaTiposDesteAssembly()
-        {
-            resultingMetric = ((Ce)resultingMetric).Ignoring(GetType().Assembly);
         }
     }
 }
